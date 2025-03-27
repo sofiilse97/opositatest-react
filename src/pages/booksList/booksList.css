@@ -1,0 +1,30 @@
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.buscador {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    input {
+        width: 80%;
+    }
+}
+
+.books-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow: auto;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: grey;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
