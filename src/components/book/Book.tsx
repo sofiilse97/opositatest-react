@@ -1,3 +1,4 @@
+import { getCoverFile } from '../../api/constants/books'
 import { BookType } from '../../types/book'
 
 const Book = ({
@@ -15,7 +16,7 @@ const Book = ({
 }) => {
   return (
     <div key={key} style={{ display: 'flex', flexDirection: 'column' }}>
-      <img src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`} />
+      <img src={getCoverFile({ isbn: book.isbn })} />
       <button
         onClick={() => handleBook(book)}
         style={{ cursor: 'pointer', marginRight: '10px' }}

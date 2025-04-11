@@ -1,3 +1,4 @@
+import { getCoverFile } from '../../../api/constants/books'
 import { BookType } from '../../../types/book'
 
 const BookModal = ({
@@ -26,9 +27,7 @@ const BookModal = ({
         boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
       }}
     >
-      <img
-        src={`https://covers.openlibrary.org/b/isbn/${selectedBook.isbn}-M.jpg`}
-      />
+      <img src={getCoverFile({ isbn: selectedBook.isbn })} />
       <h2>{selectedBook.name}</h2>
       <p>
         <strong>Autor:</strong> {selectedBook.authors.join(', ')}
