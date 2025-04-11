@@ -4,6 +4,7 @@ import './booksList.css'
 import SearchBar from '../../components/search/SearchBar'
 import Book from '../../components/book/Book'
 import BookModal from '../../components/book/modal/BookModal'
+import { BookType } from '../../types/book.d'
 
 const BooksList: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([])
@@ -130,7 +131,7 @@ const BooksList: React.FC = () => {
 
           <div className="books-list">
             {sortedBooks.length > 0
-              ? sortedBooksData().map((book: any, index) => (
+              ? sortedBooksData().map((book: BookType, index) => (
                   <Book
                     key={index}
                     handleBook={handleBook}
@@ -139,7 +140,7 @@ const BooksList: React.FC = () => {
                     favorites={favorites}
                   />
                 ))
-              : booksData().map((book: any, index) => (
+              : booksData().map((book: BookType, index) => (
                   <Book
                     key={index}
                     handleBook={handleBook}

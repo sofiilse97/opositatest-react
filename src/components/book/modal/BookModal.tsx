@@ -1,14 +1,18 @@
+import { BookType } from '../../../types/book'
+
 const BookModal = ({
   selectedBook,
   handleFavorite,
   favorites,
   setSelectedBook,
 }: {
-  selectedBook: any
-  handleFavorite: (b: any) => void
+  selectedBook: BookType | null
+  handleFavorite: (b: BookType) => void
   favorites: Set<string>
-  setSelectedBook: (value: any) => void
+  setSelectedBook: (value: BookType | null) => void
 }) => {
+  if (selectedBook == null) return <></>
+
   return (
     <div
       style={{

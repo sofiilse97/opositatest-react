@@ -1,3 +1,5 @@
+import { BookType } from '../../types/book'
+
 const Book = ({
   key,
   handleBook,
@@ -6,9 +8,9 @@ const Book = ({
   favorites,
 }: {
   key: string | number
-  handleBook: (bk: any) => void
-  handleFavorite: (b: any) => void
-  book: any
+  handleBook: (bk: BookType) => void
+  handleFavorite: (b: BookType) => void
+  book: BookType
   favorites: Set<string>
 }) => {
   return (
