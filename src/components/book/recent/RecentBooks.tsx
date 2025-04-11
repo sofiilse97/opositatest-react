@@ -9,6 +9,7 @@ const RecentBooks = ({
 }) => {
   return (
     <div>
+      <h3>Recientes</h3>
       {Array.from(recentBooks).map((url) => {
         const book = libros.find((b) => b.url === url);
         console.log(book);

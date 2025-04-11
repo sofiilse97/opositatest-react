@@ -5,6 +5,7 @@ import Book from '../../components/book/Book';
 import BookModal from '../../components/book/modal/BookModal';
 import { BookType } from '../../types/book.d';
 import { useBooks } from '../../hooks/useBooks';
+import RecentBooks from '../../components/book/recent/RecentBooks';
 
 const BooksList: React.FC = () => {
   const {
@@ -54,43 +55,36 @@ const BooksList: React.FC = () => {
           </button>
 
           {recentBooks.size > 0 && (
-            <div>
-              <h3>Recientes</h3>
-              {Array.from(recentBooks).map((url) => {
-                const book = libros.find((b) => b.url === url);
-                console.log(book);
-                return book ? (
-                  <div style={{ marginBottom: '10px' }}>
-                    <button onClick={() => handleBook(book)}>
-                      {book.name}
-                    </button>
-                  </div>
-                ) : null;
-              })}
-              <h3>Lista de libros</h3>
-            </div>
+            <RecentBooks
+              recentBooks={recentBooks}
+              libros={libros}
+              handleBook={handleBook}
+            />
           )}
 
-          <div className="books-list">
-            {sortedBooks.length > 0
-              ? sortedBooksData().map((book: BookType, index) => (
-                  <Book
-                    key={index}
-                    handleBook={handleBook}
-                    handleFavorite={handleFavorite}
-                    book={book}
-                    favorites={favorites}
-                  />
-                ))
-              : booksData().map((book: BookType, index) => (
-                  <Book
-                    key={index}
-                    handleBook={handleBook}
-                    handleFavorite={handleFavorite}
-                    book={book}
-                    favorites={favorites}
-                  />
-                ))}
+          <div>
+            <h3>Lista de libros</h3>
+            <div className="books-list">
+              {sortedBooks.length > 0
+                ? sortedBooksData().map((book: BookType, index) => (
+                    <Book
+                      key={index}
+                      handleBook={handleBook}
+                      handleFavorite={handleFavorite}
+                      book={book}
+                      favorites={favorites}
+                    />
+                  ))
+                : booksData().map((book: BookType, index) => (
+                    <Book
+                      key={index}
+                      handleBook={handleBook}
+                      handleFavorite={handleFavorite}
+                      book={book}
+                      favorites={favorites}
+                    />
+                  ))}
+            </div>
           </div>
         </div>
 
