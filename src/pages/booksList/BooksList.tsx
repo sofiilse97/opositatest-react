@@ -7,15 +7,15 @@ import BookModal from '../../components/book/modal/BookModal'
 import { BookType } from '../../types/book.d'
 
 const BooksList: React.FC = () => {
-  const [libros, setLibros] = useState<any[]>([])
+  const [libros, setLibros] = useState<BookType[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
   const [recentBooks, setRecentBooks] = useState<Set<string>>(new Set())
-  const [selectedBook, setSelectedBook] = useState<any>(null)
+  const [selectedBook, setSelectedBook] = useState<BookType | null>(null)
   const [isSortedAsc, setIsSortedAsc] = useState<boolean>(true) // Check the sorting status
-  const [sortedBooks, setSortedBooks] = useState([])
+  const [sortedBooks, setSortedBooks] = useState<BookType[]>([])
 
   useEffect(() => {
     initBooks()
@@ -37,13 +37,13 @@ const BooksList: React.FC = () => {
   }
 
   const booksData = () => {
-    return lodash.filter(libros, (b: any) =>
+    return lodash.filter(libros, (b: BookType) =>
       lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
     )
   }
 
   const sortedBooksData = () => {
-    return lodash.filter(sortedBooks, (b: any) =>
+    return lodash.filter(sortedBooks, (b: BookType) =>
       lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
     )
   }
@@ -57,18 +57,18 @@ const BooksList: React.FC = () => {
         return b.name.localeCompare(a.name) // Orden descendente
       }
     })
-    setSortedBooks(sortedBooks as any)
+    setSortedBooks(sortedBooks)
     setIsSortedAsc(!isSortedAsc) // Cambiar la dirección del orden
   }
 
   // Presiona un libro
-  const handleBook = (bk: any) => {
+  const handleBook = (bk: BookType) => {
     setSelectedBook(bk)
     setRecentBooks((prev) => new Set(prev).add(bk.url))
   }
 
   // Press the favorites button
-  const handleFavorite = (b: any) => {
+  const handleFavorite = (b: BookType) => {
     setFavorites((prev) => {
       const newFavorites = new Set(prev)
       if (newFavorites.has(b.url)) {
