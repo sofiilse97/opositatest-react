@@ -15,7 +15,7 @@ const BooksList: React.FC = () => {
     handleSort,
     handleBook,
     handleFavorite,
-    libros,
+    books,
     loading,
     error,
     searchQuery,
@@ -57,7 +57,7 @@ const BooksList: React.FC = () => {
           {recentBooks.size > 0 && (
             <RecentBooks
               recentBooks={recentBooks}
-              libros={libros}
+              books={books}
               handleBook={handleBook}
             />
           )}

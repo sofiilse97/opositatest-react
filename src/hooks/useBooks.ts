@@ -4,7 +4,7 @@ import { BookType } from '../types/book';
 import { searchBooks } from '../api/constants/books';
 
 export const useBooks = () => {
-  const [libros, setLibros] = useState<BookType[]>([]);
+  const [books, setBooks] = useState<BookType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -21,7 +21,7 @@ export const useBooks = () => {
       const response = await searchBooks();
       const data = await response.json();
 
-      setLibros(data);
+      setBooks(data);
       setError(null);
     } catch (error) {
       setError('Error fetching books');
@@ -31,7 +31,7 @@ export const useBooks = () => {
   };
 
   const booksData = () => {
-    return lodash.filter(libros, (b: BookType) =>
+    return lodash.filter(books, (b: BookType) =>
       lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
     );
   };
@@ -44,7 +44,7 @@ export const useBooks = () => {
 
   // Sort the books by name
   const handleSort = () => {
-    const sortedBooks = libros.sort((a, b) => {
+    const sortedBooks = books.sort((a, b) => {
       if (isSortedAsc) {
         return a.name.localeCompare(b.name); // Orden ascendente
       } else {
@@ -90,8 +90,8 @@ export const useBooks = () => {
     handleSort,
     handleBook,
     handleFavorite,
-    libros,
-    setLibros,
+    books,
+    setBooks,
     loading,
     setLoading,
     error,

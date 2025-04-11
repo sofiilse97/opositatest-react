@@ -1,17 +1,19 @@
+import { BookType } from '../../../types/book';
+
 const RecentBooks = ({
   recentBooks,
-  libros,
+  books,
   handleBook,
 }: {
   recentBooks: Set<string>;
-  libros: any;
-  handleBook: any;
+  books: BookType[];
+  handleBook: (bk: BookType) => void;
 }) => {
   return (
     <div>
       <h3>Recientes</h3>
       {Array.from(recentBooks).map((url) => {
-        const book = libros.find((b) => b.url === url);
+        const book = books.find((b) => b.url === url);
         console.log(book);
         return book ? (
           <div style={{ marginBottom: '10px' }}>
