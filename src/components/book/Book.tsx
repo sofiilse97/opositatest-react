@@ -15,24 +15,52 @@ const Book = ({
   favorites: Set<string>;
 }) => {
   return (
-    <div key={key} style={{ display: 'flex', flexDirection: 'column' }}>
-      <img src={getCoverFile({ isbn: book.isbn })} />
-      <button
-        onClick={() => handleBook(book)}
-        style={{ cursor: 'pointer', marginRight: '10px' }}
-      >
-        {book.name}
-      </button>
-      <button
-        onClick={() => handleFavorite(book)}
+    <div
+      key={key}
+      style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+      onClick={() => handleBook(book)}
+    >
+      <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            position: 'absolute',
+            right: '5px',
+            top: '5px',
+            pointerEvents: 'auto',
+          }}
+        >
+          <button
+            onClick={(event: any) => {
+              event.stopPropagation();
+              handleFavorite(book);
+            }}
+            style={{
+              backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
+              padding: '5px',
+              cursor: 'pointer',
+            }}
+          >
+            {favorites.has(book.url) ? '★' : '☆'}
+          </button>
+        </div>
+        <img
+          src={getCoverFile({ isbn: book.isbn })}
+          height={280}
+          width={180}
+          style={{ objectFit: 'cover', objectPosition: 'center center' }}
+        />
+      </div>
+
+      <p
         style={{
-          backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
-          padding: '5px',
-          cursor: 'pointer',
+          margin: 0,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         }}
       >
-        {favorites.has(book.url) ? '★' : '☆'}
-      </button>
+        {book.name}
+      </p>
     </div>
   );
 };
