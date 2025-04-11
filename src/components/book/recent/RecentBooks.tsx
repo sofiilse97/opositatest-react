@@ -12,15 +12,21 @@ const RecentBooks = ({
   return (
     <div>
       <h3>Recientes</h3>
-      {Array.from(recentBooks).map((url) => {
-        const book = books.find((b) => b.url === url);
-        console.log(book);
-        return book ? (
-          <div style={{ marginBottom: '10px' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '10px',
+          flexWrap: 'wrap',
+        }}
+      >
+        {Array.from(recentBooks).map((url) => {
+          const book = books.find((b) => b.url === url);
+          return book ? (
             <button onClick={() => handleBook(book)}>{book.name}</button>
-          </div>
-        ) : null;
-      })}
+          ) : null;
+        })}
+      </div>
     </div>
   );
 };
