@@ -46,14 +46,6 @@ const BooksList: React.FC = () => {
         />
 
         <div className="body">
-          <p>
-            <strong>Libros encontrados:</strong> {booksData().length}
-          </p>
-
-          <button style={{ marginBottom: '10px' }} onClick={handleSort}>
-            {isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}
-          </button>
-
           {recentBooks.size > 0 && (
             <RecentBooks
               recentBooks={recentBooks}
@@ -63,7 +55,12 @@ const BooksList: React.FC = () => {
           )}
 
           <div>
-            <h3>Lista de libros</h3>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+              <h3>{booksData().length} resultados</h3>
+              <button style={{ marginBottom: '10px' }} onClick={handleSort}>
+                {isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}
+              </button>
+            </div>
             <div className="books-list">
               {sortedBooks.length > 0
                 ? sortedBooksData().map((book: BookType, index) => (
