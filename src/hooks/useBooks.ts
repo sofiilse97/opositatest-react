@@ -2,6 +2,7 @@ import { useState } from 'react';
 import lodash from 'lodash';
 import { BookType } from '../types/book';
 import { searchBooks } from '../api/constants/books';
+import { useNavigate } from 'react-router';
 
 export const useBooks = () => {
   const [books, setBooks] = useState<BookType[]>([]);
@@ -13,6 +14,7 @@ export const useBooks = () => {
   const [selectedBook, setSelectedBook] = useState<BookType | null>(null);
   const [isSortedAsc, setIsSortedAsc] = useState<boolean>(true); // Check the sorting status
   const [sortedBooks, setSortedBooks] = useState<BookType[]>([]);
+  const navigate = useNavigate();
 
   // Obtenemos los libros
   const initBooks = async () => {
@@ -57,8 +59,9 @@ export const useBooks = () => {
 
   // Presiona un libro
   const handleBook = (bk: BookType) => {
-    setSelectedBook(bk);
+    // setSelectedBook(bk);
     setRecentBooks((prev) => new Set(prev).add(bk.url));
+    navigate(`/book/${encodeURIComponent(bk.url)}`);
   };
 
   // Press the favorites button
