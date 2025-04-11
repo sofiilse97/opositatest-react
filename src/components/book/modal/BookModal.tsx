@@ -1,5 +1,6 @@
 import { getCoverFile } from '../../../api/constants/books';
 import { BookType } from '../../../types/book';
+import { parseYear } from '../../../utils/dates/dateUtil';
 
 const BookModal = ({
   selectedBook,
@@ -25,6 +26,7 @@ const BookModal = ({
         padding: '20px',
         borderRadius: '10px',
         boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+        color: 'black',
       }}
     >
       <img src={getCoverFile({ isbn: selectedBook.isbn })} />
@@ -39,7 +41,7 @@ const BookModal = ({
         <strong>Páginas:</strong> {selectedBook.numberOfPages}
       </p>
       <p>
-        <strong>Año:</strong> {selectedBook.released}
+        <strong>Año:</strong> {parseYear(selectedBook.released)}
       </p>
       <button
         onClick={() => handleFavorite(selectedBook)}
