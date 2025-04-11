@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import lodash from 'lodash'
 import './booksList.css'
 import SearchBar from '../../components/search/SearchBar'
+import Book from '../../components/book/Book'
+import BookModal from '../../components/book/modal/BookModal'
 
 const BooksList: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([])
@@ -129,131 +131,33 @@ const BooksList: React.FC = () => {
           <div className="books-list">
             {sortedBooks.length > 0
               ? sortedBooksData().map((book: any, index) => (
-                  <div
+                  <Book
                     key={index}
-                    style={{ display: 'flex', flexDirection: 'column' }}
-                  >
-                    <img
-                      src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                    />
-                    <button
-                      onClick={() => handleBook(book)}
-                      style={{ cursor: 'pointer', marginRight: '10px' }}
-                    >
-                      {book.name}
-                    </button>
-                    <button
-                      onClick={() => handleFavorite(book)}
-                      style={{
-                        backgroundColor: favorites.has(book.url)
-                          ? 'gold'
-                          : '#ddd',
-                        padding: '5px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {favorites.has(book.url) ? '★' : '☆'}
-                    </button>
-                  </div>
+                    handleBook={handleBook}
+                    handleFavorite={handleFavorite}
+                    book={book}
+                    favorites={favorites}
+                  />
                 ))
               : booksData().map((book: any, index) => (
-                  <div
+                  <Book
                     key={index}
-                    style={{ display: 'flex', flexDirection: 'column' }}
-                  >
-                    <img
-                      src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                    />
-                    <button
-                      onClick={() => handleBook(book)}
-                      style={{ cursor: 'pointer', marginRight: '10px' }}
-                    >
-                      {book.name}
-                    </button>
-                    <button
-                      onClick={() => handleFavorite(book)}
-                      style={{
-                        backgroundColor: favorites.has(book.url)
-                          ? 'gold'
-                          : '#ddd',
-                        padding: '5px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {favorites.has(book.url) ? '★' : '☆'}
-                    </button>
-                  </div>
+                    handleBook={handleBook}
+                    handleFavorite={handleFavorite}
+                    book={book}
+                    favorites={favorites}
+                  />
                 ))}
           </div>
         </div>
 
         {selectedBook && (
-          <div
-            style={{
-              position: 'fixed',
-              top: '20%',
-              left: '50%',
-              transform: 'translate(-50%, -20%)',
-              backgroundColor: 'white',
-              padding: '20px',
-              borderRadius: '10px',
-              boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
-            }}
-          >
-            <img
-              src={`https://covers.openlibrary.org/b/isbn/${selectedBook.isbn}-M.jpg`}
-            />
-            <h2>{selectedBook.name}</h2>
-            <p>
-              <strong>Autor:</strong> {selectedBook.authors.join(', ')}
-            </p>
-            <p>
-              <strong>Editorial:</strong> {selectedBook.publisher}
-            </p>
-            <p>
-              <strong>Páginas:</strong> {selectedBook.numberOfPages}
-            </p>
-            <p>
-              <strong>Año:</strong> {selectedBook.released}
-            </p>
-            <button
-              onClick={() => handleFavorite(selectedBook)}
-              style={{
-                backgroundColor: '#007bff',
-                color: 'white',
-                padding: '10px',
-                cursor: 'pointer',
-                marginBottom: '10px',
-              }}
-            >
-              {favorites.has(selectedBook.url)
-                ? 'Quitar de favoritos'
-                : 'Agregar a favoritos'}
-            </button>
-            <button
-              onClick={() => setSelectedBook(null)}
-              style={{
-                backgroundColor: '#ccc',
-                padding: '10px',
-                cursor: 'pointer',
-                display: 'block',
-                marginBottom: '10px',
-              }}
-            >
-              Cerrar
-            </button>
-            <button
-              onClick={() => window.open(selectedBook.url, '_blank')}
-              style={{
-                backgroundColor: '#02874a',
-                color: 'white',
-                padding: '10px',
-                cursor: 'pointer',
-              }}
-            >
-              Abrir API en el navegador
-            </button>
-          </div>
+          <BookModal
+            selectedBook={selectedBook}
+            handleFavorite={handleFavorite}
+            favorites={favorites}
+            setSelectedBook={setSelectedBook}
+          />
         )}
       </div>
     </>
