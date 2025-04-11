@@ -1,5 +1,5 @@
-import { getCoverFile } from '../../api/constants/books';
-import { BookType } from '../../types/book';
+import { getCoverFile } from '../../../api/constants/books';
+import { BookType } from '../../../types/book';
 
 const Book = ({
   key,
@@ -20,7 +20,7 @@ const Book = ({
       style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
       onClick={() => handleBook(book)}
     >
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', width: 180 }}>
         <div
           style={{
             position: 'absolute',

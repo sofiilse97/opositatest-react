@@ -1,10 +1,36 @@
 .body {
   display: flex;
   flex-direction: column;
+  place-items: center;
+  gap: 20px;
 }
 
 .books-list {
   display: grid;
   grid-template-columns: repeat(6, minmax(0px, 1fr));
   gap: 16px;
+}
+
+@media (max-width: 479px) {
+  .books-list {
+    grid-template-columns: repeat(1, minmax(0px, 1fr));
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .books-list {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .books-list {
+    grid-template-columns: repeat(4, minmax(0px, 1fr));
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1280px) {
+  .books-list {
+    grid-template-columns: repeat(4, minmax(0px, 1fr));
+  }
 }

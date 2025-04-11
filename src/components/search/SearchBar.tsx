@@ -16,23 +16,8 @@ const SearchBar = ({
         placeholder="Buscar libro"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        style={{
-          padding: '10px',
-          marginBottom: '10px',
-          border: '1px solid #ddd',
-        }}
       />
-      <button
-        onClick={initBooks}
-        style={{
-          padding: '10px',
-          marginBottom: '20px',
-          cursor: 'pointer',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-        }}
-      >
+      <button onClick={initBooks} className="updateBtn">
         Actualizar libros
       </button>
     </div>

@@ -10,7 +10,7 @@ const RecentBooks = ({
   handleBook: (bk: BookType) => void;
 }) => {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <h3>Recientes</h3>
       <div
         style={{
