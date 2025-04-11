@@ -3,18 +3,6 @@
   flex-direction: column;
 }
 
-.buscador {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-
-  input {
-    width: 80%;
-  }
-}
-
 .books-list {
   display: flex;
   flex-direction: row;
