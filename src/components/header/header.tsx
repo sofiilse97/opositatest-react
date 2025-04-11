@@ -1,5 +1,5 @@
-import React from "react";
-import "./Header.css";
+import React from 'react'
+import './Header.css'
 import logo from '../../resources/logo.png'
 
 const Header: React.FC = () => {
@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     <div className="header">
       <img src={logo} alt="Logo" className="logo" />
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
