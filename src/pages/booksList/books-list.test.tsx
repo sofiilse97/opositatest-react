@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import BooksList from '../booksList/books-list'
+import BooksList from '../booksList/BooksList'
 
 describe('BooksList', () => {
   it('renderiza correctamente', async () => {
