@@ -1,5 +1,5 @@
 import React from 'react'
-import BooksList from './pages/booksList/books-list'
+import BooksList from './pages/booksList/BooksList'
 import Header from './components/header/header'
 import Footer from './components/footer/Footer'
 
