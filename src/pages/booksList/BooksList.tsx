@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import lodash from 'lodash'
 import './booksList.css'
-import Footer from '../../components/footer/Footer'
+import SearchBar from '../../components/search/SearchBar'
 
 const BooksList: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([])
@@ -86,129 +86,106 @@ const BooksList: React.FC = () => {
   //     setLibros((prevLibros) => [...prevLibros, ...booksStartingWithA]);
   //   };
 
+  if (loading) return <p>Cargando...</p>
+
+  if (error) return <p style={{ color: 'red' }}>{error}</p>
+
   return (
     <>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-        <div className="buscador">
-          <input
-            type="text"
-            placeholder="Buscar libro"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: '10px',
-              marginBottom: '10px',
-              border: '1px solid #ddd',
-            }}
-          />
-          <button
-            onClick={initBooks}
-            style={{
-              padding: '10px',
-              marginBottom: '20px',
-              cursor: 'pointer',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-            }}
-          >
-            Actualizar libros
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          initBooks={initBooks}
+        />
+
+        <div className="body">
+          <p>
+            <strong>Libros encontrados:</strong> {booksData().length}
+          </p>
+
+          <button style={{ marginBottom: '10px' }} onClick={handleSort}>
+            {isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}
           </button>
-        </div>
 
-        {loading ? (
-          <p>Cargando...</p>
-        ) : error ? (
-          <p style={{ color: 'red' }}>{error}</p>
-        ) : (
-          <div className="body">
-            <p>
-              <strong>Libros encontrados:</strong> {booksData().length}
-            </p>
-
-            <button style={{ marginBottom: '10px' }} onClick={handleSort}>
-              {isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}
-            </button>
-
-            {recentBooks.size > 0 && (
-              <div>
-                <h3>Recientes</h3>
-                {Array.from(recentBooks).map((url) => {
-                  const book = libros.find((b) => b.url === url)
-                  console.log(book)
-                  return book ? (
-                    <div style={{ marginBottom: '10px' }}>
-                      <button onClick={() => handleBook(book)}>
-                        {book.name}
-                      </button>
-                    </div>
-                  ) : null
-                })}
-                <h3>Lista de libros</h3>
-              </div>
-            )}
-
-            <div className="books-list">
-              {sortedBooks.length > 0
-                ? sortedBooksData().map((book: any, index) => (
-                    <div
-                      key={index}
-                      style={{ display: 'flex', flexDirection: 'column' }}
-                    >
-                      <img
-                        src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                      />
-                      <button
-                        onClick={() => handleBook(book)}
-                        style={{ cursor: 'pointer', marginRight: '10px' }}
-                      >
-                        {book.name}
-                      </button>
-                      <button
-                        onClick={() => handleFavorite(book)}
-                        style={{
-                          backgroundColor: favorites.has(book.url)
-                            ? 'gold'
-                            : '#ddd',
-                          padding: '5px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        {favorites.has(book.url) ? '★' : '☆'}
-                      </button>
-                    </div>
-                  ))
-                : booksData().map((book: any, index) => (
-                    <div
-                      key={index}
-                      style={{ display: 'flex', flexDirection: 'column' }}
-                    >
-                      <img
-                        src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
-                      />
-                      <button
-                        onClick={() => handleBook(book)}
-                        style={{ cursor: 'pointer', marginRight: '10px' }}
-                      >
-                        {book.name}
-                      </button>
-                      <button
-                        onClick={() => handleFavorite(book)}
-                        style={{
-                          backgroundColor: favorites.has(book.url)
-                            ? 'gold'
-                            : '#ddd',
-                          padding: '5px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        {favorites.has(book.url) ? '★' : '☆'}
-                      </button>
-                    </div>
-                  ))}
+          {recentBooks.size > 0 && (
+            <div>
+              <h3>Recientes</h3>
+              {Array.from(recentBooks).map((url) => {
+                const book = libros.find((b) => b.url === url)
+                console.log(book)
+                return book ? (
+                  <div style={{ marginBottom: '10px' }}>
+                    <button onClick={() => handleBook(book)}>
+                      {book.name}
+                    </button>
+                  </div>
+                ) : null
+              })}
+              <h3>Lista de libros</h3>
             </div>
+          )}
+
+          <div className="books-list">
+            {sortedBooks.length > 0
+              ? sortedBooksData().map((book: any, index) => (
+                  <div
+                    key={index}
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <img
+                      src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
+                    />
+                    <button
+                      onClick={() => handleBook(book)}
+                      style={{ cursor: 'pointer', marginRight: '10px' }}
+                    >
+                      {book.name}
+                    </button>
+                    <button
+                      onClick={() => handleFavorite(book)}
+                      style={{
+                        backgroundColor: favorites.has(book.url)
+                          ? 'gold'
+                          : '#ddd',
+                        padding: '5px',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {favorites.has(book.url) ? '★' : '☆'}
+                    </button>
+                  </div>
+                ))
+              : booksData().map((book: any, index) => (
+                  <div
+                    key={index}
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <img
+                      src={`https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`}
+                    />
+                    <button
+                      onClick={() => handleBook(book)}
+                      style={{ cursor: 'pointer', marginRight: '10px' }}
+                    >
+                      {book.name}
+                    </button>
+                    <button
+                      onClick={() => handleFavorite(book)}
+                      style={{
+                        backgroundColor: favorites.has(book.url)
+                          ? 'gold'
+                          : '#ddd',
+                        padding: '5px',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {favorites.has(book.url) ? '★' : '☆'}
+                    </button>
+                  </div>
+                ))}
           </div>
-        )}
+        </div>
 
         {selectedBook && (
           <div
