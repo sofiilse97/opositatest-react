@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import './booksList.css'
-import SearchBar from '../../components/search/SearchBar'
-import Book from '../../components/book/Book'
-import BookModal from '../../components/book/modal/BookModal'
-import { BookType } from '../../types/book.d'
-import { useBooks } from '../../hooks/useBooks'
+import React, { useEffect } from 'react';
+import './booksList.css';
+import SearchBar from '../../components/search/SearchBar';
+import Book from '../../components/book/Book';
+import BookModal from '../../components/book/modal/BookModal';
+import { BookType } from '../../types/book.d';
+import { useBooks } from '../../hooks/useBooks';
 
 const BooksList: React.FC = () => {
   const {
@@ -25,15 +25,15 @@ const BooksList: React.FC = () => {
     setSelectedBook,
     isSortedAsc,
     sortedBooks,
-  } = useBooks()
+  } = useBooks();
 
   useEffect(() => {
-    initBooks()
-  }, [favorites])
+    initBooks();
+  }, [favorites]);
 
-  if (loading) return <p>Cargando...</p>
+  if (loading) return <p>Cargando...</p>;
 
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
   return (
     <>
@@ -57,15 +57,15 @@ const BooksList: React.FC = () => {
             <div>
               <h3>Recientes</h3>
               {Array.from(recentBooks).map((url) => {
-                const book = libros.find((b) => b.url === url)
-                console.log(book)
+                const book = libros.find((b) => b.url === url);
+                console.log(book);
                 return book ? (
                   <div style={{ marginBottom: '10px' }}>
                     <button onClick={() => handleBook(book)}>
                       {book.name}
                     </button>
                   </div>
-                ) : null
+                ) : null;
               })}
               <h3>Lista de libros</h3>
             </div>
@@ -104,7 +104,7 @@ const BooksList: React.FC = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default BooksList
+export default BooksList;

@@ -1,7 +1,7 @@
-import './footer.css'
+import './footer.css';
 
 const Footer = () => {
-  return <div className="footer">Prueba técnica OpositaTest</div>
-}
+  return <div className="footer">Prueba técnica OpositaTest</div>;
+};
 
-export default Footer
+export default Footer;

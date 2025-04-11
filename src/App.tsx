@@ -1,7 +1,7 @@
-import React from 'react'
-import BooksList from './pages/booksList/BooksList'
-import Header from './components/header/header'
-import Footer from './components/footer/Footer'
+import React from 'react';
+import BooksList from './pages/booksList/BooksList';
+import Header from './components/header/header';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <BooksList />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

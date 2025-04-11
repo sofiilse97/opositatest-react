@@ -1,13 +1,13 @@
-import './searchBar.css'
+import './searchBar.css';
 
 const SearchBar = ({
   searchQuery,
   setSearchQuery,
   initBooks,
 }: {
-  searchQuery: string
-  setSearchQuery: (value: React.SetStateAction<string>) => void
-  initBooks: () => Promise<void>
+  searchQuery: string;
+  setSearchQuery: (value: React.SetStateAction<string>) => void;
+  initBooks: () => Promise<void>;
 }) => {
   return (
     <div className="buscador">
@@ -36,7 +36,7 @@ const SearchBar = ({
         Actualizar libros
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

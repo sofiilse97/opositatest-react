@@ -1,5 +1,5 @@
-import { getCoverFile } from '../../../api/constants/books'
-import { BookType } from '../../../types/book'
+import { getCoverFile } from '../../../api/constants/books';
+import { BookType } from '../../../types/book';
 
 const BookModal = ({
   selectedBook,
@@ -7,12 +7,12 @@ const BookModal = ({
   favorites,
   setSelectedBook,
 }: {
-  selectedBook: BookType | null
-  handleFavorite: (b: BookType) => void
-  favorites: Set<string>
-  setSelectedBook: (value: BookType | null) => void
+  selectedBook: BookType | null;
+  handleFavorite: (b: BookType) => void;
+  favorites: Set<string>;
+  setSelectedBook: (value: BookType | null) => void;
 }) => {
-  if (selectedBook == null) return <></>
+  if (selectedBook == null) return <></>;
 
   return (
     <div
@@ -79,7 +79,7 @@ const BookModal = ({
         Abrir API en el navegador
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default BookModal
+export default BookModal;

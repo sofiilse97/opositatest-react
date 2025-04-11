@@ -1,5 +1,5 @@
-import { getCoverFile } from '../../api/constants/books'
-import { BookType } from '../../types/book'
+import { getCoverFile } from '../../api/constants/books';
+import { BookType } from '../../types/book';
 
 const Book = ({
   key,
@@ -8,11 +8,11 @@ const Book = ({
   book,
   favorites,
 }: {
-  key: string | number
-  handleBook: (bk: BookType) => void
-  handleFavorite: (b: BookType) => void
-  book: BookType
-  favorites: Set<string>
+  key: string | number;
+  handleBook: (bk: BookType) => void;
+  handleFavorite: (b: BookType) => void;
+  book: BookType;
+  favorites: Set<string>;
 }) => {
   return (
     <div key={key} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -34,7 +34,7 @@ const Book = ({
         {favorites.has(book.url) ? '★' : '☆'}
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default Book
+export default Book;
