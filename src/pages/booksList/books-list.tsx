@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import lodash from 'lodash'
 import './booksList.css'
+import Footer from '../../components/footer/Footer'
 
 const BooksList: React.FC = () => {
   const [libros, setLibros] = useState<any[]>([])
@@ -76,6 +77,7 @@ const BooksList: React.FC = () => {
     })
   }
 
+  // TODO: remove???
   //   const handleAddBooksStartingWithA = () => {
   //     const booksStartingWithA = libros.filter((book: any) =>
   //       book.name.toLowerCase().startsWith('a')
@@ -277,7 +279,6 @@ const BooksList: React.FC = () => {
           </div>
         )}
       </div>
-      <div className="footer">Prueba técnica OpositaTest</div>
     </>
   )
 }
