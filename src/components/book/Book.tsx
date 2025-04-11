@@ -36,8 +36,9 @@ const Book = ({
             }}
             style={{
               backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
-              padding: '5px',
+              padding: '3px 7px',
               cursor: 'pointer',
+              borderRadius: '50%',
             }}
           >
             {favorites.has(book.url) ? '★' : '☆'}
