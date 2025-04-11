@@ -8,4 +8,4 @@ Depués de clonarme el repositorio original antes de realizar cualquier mejora e
 
 ## Mejora 2
 
-He configurado el estlint muy basico,
+He configurado el estlint muy basico y he añadido prettier para el formateo de ficheros.
