@@ -1,6 +1,6 @@
 import { getCoverFile } from '../../../api/constants/books';
 import { BookType } from '../../../types/book';
-
+import defaultBook from '../../../resources/defaultBook.png';
 const Book = ({
   key,
   handleBook,
@@ -48,7 +48,11 @@ const Book = ({
           src={getCoverFile({ isbn: book.isbn })}
           height={280}
           width={180}
-          style={{ objectFit: 'cover', objectPosition: 'center center' }}
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            backgroundImage: `url(${defaultBook})`,
+          }}
         />
       </div>
 

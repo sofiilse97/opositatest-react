@@ -17,13 +17,18 @@ const RecentBooks = ({
           display: 'flex',
           flexDirection: 'row',
           gap: '10px',
-          flexWrap: 'wrap',
+          overflowY: 'auto',
         }}
       >
         {Array.from(recentBooks).map((url) => {
           const book = books.find((b) => b.url === url);
           return book ? (
-            <button onClick={() => handleBook(book)}>{book.name}</button>
+            <button
+              style={{ minWidth: '180px' }}
+              onClick={() => handleBook(book)}
+            >
+              {book.name}
+            </button>
           ) : null;
         })}
       </div>
