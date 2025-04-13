@@ -5,13 +5,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: blue;
+  background-color: var(--primary-color);
   cursor: pointer;
-  transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: var(--primary-light);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

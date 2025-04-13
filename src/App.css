@@ -1,11 +1,3 @@
-:root {
-  --primary-color: #ffb142;
-  --primary-dark: #ff793f;
-  --text-color: #383641;
-  --grey-color: #88868d;
-  --box-shadow: rgba(0, 0, 0, 0.1);
-}
-
 /*#root {
   max-width: 1280px;
   margin: 0 auto;
