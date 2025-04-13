@@ -1,20 +1,23 @@
 import BooksList from './pages/booksList/BooksList';
-import Header from './components/header/header';
-import Footer from './components/footer/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import BookData from './pages/bookData/BookData';
+import './App.css';
+import LibraryProvider from './context/LibraryProvider';
+import MyAccount from './pages/myAccount/MyAccount';
+import MainApp from './layouts/MainApp';
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route index element={<BooksList />} />
-          <Route path="/book/:url" index element={<BookData />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <LibraryProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainApp />}>
+              <Route index element={<BooksList />} />
+              <Route path="/myAccount" element={<MyAccount />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </LibraryProvider>
     </>
   );
 };
