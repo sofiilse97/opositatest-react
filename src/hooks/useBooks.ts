@@ -1,24 +1,35 @@
 import { useState } from 'react';
-import lodash from 'lodash';
 import { BookType } from '../types/book';
 import { searchBooks } from '../api/constants/books';
-import { useNavigate } from 'react-router';
+import { useLibrary } from '../context/hooks/useLibrary';
 
 export const useBooks = () => {
-  const [books, setBooks] = useState<BookType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
-  const [recentBooks, setRecentBooks] = useState<Set<string>>(new Set());
-  const [selectedBook, setSelectedBook] = useState<BookType | null>(null);
-  const [isSortedAsc, setIsSortedAsc] = useState<boolean>(true); // Check the sorting status
-  const [sortedBooks, setSortedBooks] = useState<BookType[]>([]);
-  const navigate = useNavigate();
 
-  // Obtenemos los libros
+  const {
+    books,
+    setBooks,
+    searchQuery,
+    setSearchQuery,
+    favorites,
+    setFavorites,
+    recentBooks,
+    setRecentBooks,
+    selectedBook,
+    setSelectedBook,
+    isSortedAsc,
+    setIsSortedAsc,
+    sortedBooks,
+    setSortedBooks,
+  } = useLibrary();
+
+  /**
+   * Initialize the books
+   */
   const initBooks = async () => {
     setLoading(true);
+
     try {
       const response = await searchBooks();
       const data = await response.json();
@@ -26,53 +37,93 @@ export const useBooks = () => {
       setBooks(data);
       setError(null);
     } catch (error) {
+      console.error('Error fetching books:', error);
       setError('Error fetching books');
     } finally {
       setLoading(false);
     }
   };
 
-  const booksData = () => {
-    return lodash.filter(books, (b: BookType) =>
-      lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
+  /**
+   * Filer books by query
+   * @param books array of books to filter
+   * @param query the search query
+   */
+  const filterBooks = (books: BookType[], query: string): BookType[] => {
+    // remove lodash beacause it is not necessary, javascript has a built-in method to filter arrays
+    return books.filter((b) =>
+      b.name.toLowerCase().includes(query.toLowerCase())
     );
   };
 
-  const sortedBooksData = () => {
-    return lodash.filter(sortedBooks, (b: BookType) =>
-      lodash.includes(lodash.toLower(b.name), lodash.toLower(searchQuery))
+  /**
+   * Returns the books filtered by the search query
+   */
+  const booksData = (): BookType[] => filterBooks(books, searchQuery);
+
+  /**
+   * Returns the books sorted and filtered by the search query
+   */
+  const sortedBooksData = (): BookType[] =>
+    filterBooks(sortedBooks, searchQuery);
+
+  /**
+   * Sorting books by name
+   * @param books array of books to sorting
+   * @param sortDir true for ascending, false for descending
+   */
+  const sortBooks = (books: BookType[], sortDir: boolean) => {
+    // add [...books] to avoid mutating the original array and sort the books by name
+    return [...books].sort((a, b) =>
+      sortDir ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
   };
 
-  // Sort the books by name
+  /**
+   * Sort the books by name
+   */
   const handleSort = () => {
-    const sortedBooks = books.sort((a, b) => {
-      if (isSortedAsc) {
-        return a.name.localeCompare(b.name); // Orden ascendente
-      } else {
-        return b.name.localeCompare(a.name); // Orden descendente
-      }
-    });
-    setSortedBooks(sortedBooks);
-    setIsSortedAsc(!isSortedAsc); // Cambiar la dirección del orden
+    setSortedBooks(sortBooks(books, isSortedAsc));
+    setIsSortedAsc(!isSortedAsc);
   };
 
-  // Presiona un libro
+  /**
+   * Sort the books by name passing the direction
+   * @param sortDir true for ascending, false for descending
+   */
+  const handleSortWithOpt = (sortDir: boolean) => {
+    if (sortDir === isSortedAsc) return;
+    setSortedBooks(sortBooks(books, sortDir));
+    setIsSortedAsc(sortDir);
+  };
+
+  /**
+   * Open the book details and save the book in recent books
+   * @param bk the book to set as selected
+   */
   const handleBook = (bk: BookType) => {
-    // setSelectedBook(bk);
-    setRecentBooks((prev) => new Set(prev).add(bk.url));
-    navigate(`/book/${encodeURIComponent(bk.url)}`);
+    setSelectedBook(bk);
+    // add return to identify correctly the change
+    setRecentBooks((prev) => {
+      const newSet = new Set(prev);
+      newSet.add(bk.url);
+      return newSet;
+    });
   };
 
-  // Press the favorites button
+  /**
+   * Add or remove a book from favorites
+   * @param b the book to add or remove
+   */
   const handleFavorite = (b: BookType) => {
     setFavorites((prev) => {
-      const newFavorites = new Set(prev);
+      const newFavorites = new Map(prev);
       if (newFavorites.has(b.url)) {
         newFavorites.delete(b.url);
       } else {
-        newFavorites.add(b.url);
+        newFavorites.set(b.url, b);
       }
+
       return newFavorites;
     });
   };
@@ -91,6 +142,7 @@ export const useBooks = () => {
     booksData,
     sortedBooksData,
     handleSort,
+    handleSortWithOpt,
     handleBook,
     handleFavorite,
     books,
