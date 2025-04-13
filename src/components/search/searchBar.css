@@ -1,14 +1,18 @@
 .buscador {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
 
-  input {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ddd;
+  input[type='text'] {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid #4b5563;
+    background-color: #1f2937;
+    color: white;
   }
 }
 

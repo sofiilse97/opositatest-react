@@ -1,14 +1,10 @@
+import { useLibrary } from '../../context/hooks/useLibrary';
+import Button from '../ui/button/Button';
 import './searchBar.css';
 
-const SearchBar = ({
-  searchQuery,
-  setSearchQuery,
-  initBooks,
-}: {
-  searchQuery: string;
-  setSearchQuery: (value: React.SetStateAction<string>) => void;
-  initBooks: () => Promise<void>;
-}) => {
+const SearchBar = () => {
+  const { searchQuery, setSearchQuery, initBooks } = useLibrary();
+
   return (
     <div className="buscador">
       <input
@@ -17,9 +13,9 @@ const SearchBar = ({
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button onClick={initBooks} className="updateBtn">
+      <Button onClick={initBooks} className="updateBtn">
         Actualizar libros
-      </button>
+      </Button>
     </div>
   );
 };
