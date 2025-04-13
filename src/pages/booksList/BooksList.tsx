@@ -7,6 +7,7 @@ import { BookType } from '../../types/book.d';
 import { useBooks } from '../../hooks/useBooks';
 import RecentBooks from '../../components/book/recent/RecentBooks';
 import { useLibrary } from '../../context/hooks/useLibrary';
+import Select from '../../components/ui/select/Select';
 
 const BooksList: React.FC = () => {
   const {
@@ -45,14 +46,14 @@ const BooksList: React.FC = () => {
 
           <div className="result-container">
             <h3>{booksData().length} resultados</h3>
-            <select
-              name="Ordenar"
+            <Select
+              options={[
+                { label: 'Ordenar por: Descendente', value: 'false' },
+                { label: 'Ordenar por: Ascendente', value: 'true' },
+              ]}
+              onChange={(value) => handleSortWithOpt(value === 'true')}
               value={libraryState.isSortedAsc.toString()}
-              onChange={(e) => handleSortWithOpt(e.target.value === 'true')}
-            >
-              <option value="false">Ordenar por: Descendente</option>
-              <option value="true">Ordenar por: Ascendente</option>
-            </select>
+            />
           </div>
 
           <div className="books-list">
