@@ -1,9 +1,12 @@
 import React from 'react';
 import { useBooks } from '../../hooks/useBooks';
 import MyFavourites from '../../components/account/favourites/MyFavourites';
+import { useLibrary } from '../../context/hooks/useLibrary';
 
 const MyAccount: React.FC = () => {
-  const { handleBook, handleFavorite, favorites } = useBooks();
+  const { handleBook, handleFavorite } = useBooks();
+
+  const { libraryState } = useLibrary();
 
   return (
     <div>

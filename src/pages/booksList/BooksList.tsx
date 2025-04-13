@@ -6,6 +6,7 @@ import BookModal from '../../components/book/modal/BookModal';
 import { BookType } from '../../types/book.d';
 import { useBooks } from '../../hooks/useBooks';
 import RecentBooks from '../../components/book/recent/RecentBooks';
+import { useLibrary } from '../../context/hooks/useLibrary';
 
 const BooksList: React.FC = () => {
   const {
@@ -15,16 +16,11 @@ const BooksList: React.FC = () => {
     handleSortWithOpt,
     handleBook,
     handleFavorite,
-    books,
     loading,
     error,
-    favorites,
-    recentBooks,
-    selectedBook,
-    setSelectedBook,
-    isSortedAsc,
-    sortedBooks,
   } = useBooks();
+
+  const { libraryState, setLibraryState } = useLibrary();
 
   useEffect(() => {
     initBooks();
@@ -39,10 +35,10 @@ const BooksList: React.FC = () => {
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
         <div className="body">
           <SearchBar />
-          {recentBooks.size > 0 && (
+          {libraryState.recentBooks.size > 0 && (
             <RecentBooks
-              recentBooks={recentBooks}
-              books={books}
+              recentBooks={libraryState.recentBooks}
+              books={libraryState.books}
               handleBook={handleBook}
             />
           )}
@@ -51,7 +47,7 @@ const BooksList: React.FC = () => {
             <h3>{booksData().length} resultados</h3>
             <select
               name="Ordenar"
-              value={isSortedAsc.toString()}
+              value={libraryState.isSortedAsc.toString()}
               onChange={(e) => handleSortWithOpt(e.target.value === 'true')}
             >
               <option value="false">Ordenar por: Descendente</option>
@@ -60,7 +56,7 @@ const BooksList: React.FC = () => {
           </div>
 
           <div className="books-list">
-            {sortedBooks.length > 0
+            {libraryState.sortedBooks.length > 0
               ? sortedBooksData().map((book: BookType, index) => (
                   <Book key={index} book={book} />
                 ))
@@ -70,12 +66,11 @@ const BooksList: React.FC = () => {
           </div>
         </div>
 
-        {selectedBook && (
+        {libraryState.selectedBook && (
           <BookModal
-            selectedBook={selectedBook}
+            selectedBook={libraryState.selectedBook}
             handleFavorite={handleFavorite}
-            favorites={favorites}
-            setSelectedBook={setSelectedBook}
+            favorites={libraryState.favorites}
           />
         )}
       </div>

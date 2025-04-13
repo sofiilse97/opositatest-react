@@ -3,17 +3,17 @@ import Button from '../ui/button/Button';
 import './searchBar.css';
 
 const SearchBar = () => {
-  const { searchQuery, setSearchQuery, initBooks } = useLibrary();
+  const { libraryState, setLibraryState } = useLibrary();
 
   return (
     <div className="buscador">
       <input
         type="text"
         placeholder="Buscar libro"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={libraryState.searchQuery || ''}
+        onChange={(e) => setLibraryState({ searchQuery: e.target.value })}
       />
-      <Button onClick={initBooks} className="updateBtn">
+      <Button onClick={libraryState.initBooks} className="updateBtn">
         Actualizar libros
       </Button>
     </div>

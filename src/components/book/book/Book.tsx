@@ -3,6 +3,7 @@ import { BookType } from '../../../types/book';
 import defaultBook from '../../../resources/defaultBook.png';
 import './book.css';
 import { useBooks } from '../../../hooks/useBooks';
+import { useLibrary } from '../../../context/hooks/useLibrary';
 
 const Book = ({
   key,
@@ -12,7 +13,8 @@ const Book = ({
 
   book: BookType;
 }) => {
-  const { handleBook, handleFavorite, favorites } = useBooks();
+  const { handleBook, handleFavorite } = useBooks();
+  const { libraryState } = useLibrary();
 
   return (
     <div key={key} className="book" onClick={() => handleBook(book)}>
@@ -31,13 +33,15 @@ const Book = ({
               handleFavorite(book);
             }}
             style={{
-              backgroundColor: favorites.has(book.url) ? 'gold' : '#ddd',
+              backgroundColor: libraryState.favorites.has(book.url)
+                ? 'gold'
+                : '#ddd',
               padding: '3px 7px',
               cursor: 'pointer',
               borderRadius: '50%',
             }}
           >
-            {favorites.has(book.url) ? '★' : '☆'}
+            {libraryState.favorites.has(book.url) ? '★' : '☆'}
           </button>
         </div>
         <img

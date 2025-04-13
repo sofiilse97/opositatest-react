@@ -1,4 +1,5 @@
 import { getCoverFile } from '../../../api/constants/books';
+import { useLibrary } from '../../../context/hooks/useLibrary';
 import { BookType } from '../../../types/book';
 import { parseYear } from '../../../utils/dates/dateUtil';
 import './bookModal.css';
@@ -6,13 +7,13 @@ const BookModal = ({
   selectedBook,
   handleFavorite,
   favorites,
-  setSelectedBook,
 }: {
   selectedBook: BookType | null;
   handleFavorite: (b: BookType) => void;
   favorites: Set<string>;
-  setSelectedBook: (value: BookType | null) => void;
 }) => {
+  const { setLibraryState } = useLibrary();
+
   if (selectedBook == null) return <></>;
 
   return (
@@ -46,7 +47,7 @@ const BookModal = ({
           : 'Agregar a favoritos'}
       </button>
       <button
-        onClick={() => setSelectedBook(null)}
+        onClick={() => setLibraryState({ selectedBook: null })}
         style={{
           backgroundColor: '#ccc',
           padding: '10px',

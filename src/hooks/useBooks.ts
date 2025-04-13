@@ -7,22 +7,16 @@ export const useBooks = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const { libraryState, setLibraryState } = useLibrary();
   const {
     books,
-    setBooks,
     searchQuery,
-    setSearchQuery,
     favorites,
-    setFavorites,
     recentBooks,
-    setRecentBooks,
     selectedBook,
-    setSelectedBook,
     isSortedAsc,
-    setIsSortedAsc,
     sortedBooks,
-    setSortedBooks,
-  } = useLibrary();
+  } = libraryState;
 
   /**
    * Initialize the books
@@ -34,7 +28,7 @@ export const useBooks = () => {
       const response = await searchBooks();
       const data = await response.json();
 
-      setBooks(data);
+      setLibraryState({ books: data });
       setError(null);
     } catch (error) {
       console.error('Error fetching books:', error);
@@ -50,6 +44,8 @@ export const useBooks = () => {
    * @param query the search query
    */
   const filterBooks = (books: BookType[], query: string): BookType[] => {
+    if (!books || books.length === 0) return [];
+
     // remove lodash beacause it is not necessary, javascript has a built-in method to filter arrays
     return books.filter((b) =>
       b.name.toLowerCase().includes(query.toLowerCase())
@@ -83,8 +79,8 @@ export const useBooks = () => {
    * Sort the books by name
    */
   const handleSort = () => {
-    setSortedBooks(sortBooks(books, isSortedAsc));
-    setIsSortedAsc(!isSortedAsc);
+    const sorted = sortBooks(books, isSortedAsc);
+    setLibraryState({ sortedBooks: sorted, isSortedAsc: !isSortedAsc });
   };
 
   /**
@@ -93,8 +89,9 @@ export const useBooks = () => {
    */
   const handleSortWithOpt = (sortDir: boolean) => {
     if (sortDir === isSortedAsc) return;
-    setSortedBooks(sortBooks(books, sortDir));
-    setIsSortedAsc(sortDir);
+
+    const sorted = sortBooks(books, sortDir);
+    setLibraryState({ sortedBooks: sorted, isSortedAsc: sortDir });
   };
 
   /**
@@ -102,12 +99,17 @@ export const useBooks = () => {
    * @param bk the book to set as selected
    */
   const handleBook = (bk: BookType) => {
-    setSelectedBook(bk);
-    // add return to identify correctly the change
-    setRecentBooks((prev) => {
-      const newSet = new Set(prev);
-      newSet.add(bk.url);
-      return newSet;
+    // setSelectedBook(bk);
+    // // add return to identify correctly the change
+    // setRecentBooks((prev) => {
+    //   const newSet = new Set(prev);
+    //   newSet.add(bk.url);
+    //   return newSet;
+    // });
+
+    setLibraryState({
+      selectedBook: bk,
+      recentBooks: new Set([...(recentBooks || []), bk.url]),
     });
   };
 
@@ -116,16 +118,14 @@ export const useBooks = () => {
    * @param b the book to add or remove
    */
   const handleFavorite = (b: BookType) => {
-    setFavorites((prev) => {
-      const newFavorites = new Map(prev);
-      if (newFavorites.has(b.url)) {
-        newFavorites.delete(b.url);
-      } else {
-        newFavorites.set(b.url, b);
-      }
+    const newFavorites = new Map(favorites || []);
+    if (newFavorites.has(b.url)) {
+      newFavorites.delete(b.url);
+    } else {
+      newFavorites.set(b.url, b);
+    }
 
-      return newFavorites;
-    });
+    setLibraryState({ favorites: newFavorites });
   };
 
   // TODO: remove???
@@ -145,23 +145,9 @@ export const useBooks = () => {
     handleSortWithOpt,
     handleBook,
     handleFavorite,
-    books,
-    setBooks,
     loading,
     setLoading,
     error,
     setError,
-    searchQuery,
-    setSearchQuery,
-    favorites,
-    setFavorites,
-    recentBooks,
-    setRecentBooks,
-    selectedBook,
-    setSelectedBook,
-    isSortedAsc,
-    setIsSortedAsc,
-    sortedBooks,
-    setSortedBooks,
   };
 };
