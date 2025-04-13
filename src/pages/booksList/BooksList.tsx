@@ -12,14 +12,12 @@ const BooksList: React.FC = () => {
     initBooks,
     booksData,
     sortedBooksData,
-    handleSort,
+    handleSortWithOpt,
     handleBook,
     handleFavorite,
     books,
     loading,
     error,
-    searchQuery,
-    setSearchQuery,
     favorites,
     recentBooks,
     selectedBook,
@@ -30,7 +28,7 @@ const BooksList: React.FC = () => {
 
   useEffect(() => {
     initBooks();
-  }, [favorites]);
+  }, []);
 
   if (loading) return <p>Cargando...</p>;
 
@@ -39,13 +37,8 @@ const BooksList: React.FC = () => {
   return (
     <>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-        <SearchBar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          initBooks={initBooks}
-        />
-
         <div className="body">
+          <SearchBar />
           {recentBooks.size > 0 && (
             <RecentBooks
               recentBooks={recentBooks}
@@ -54,39 +47,25 @@ const BooksList: React.FC = () => {
             />
           )}
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              gap: '20px',
-              width: '100%',
-            }}
-          >
+          <div className="result-container">
             <h3>{booksData().length} resultados</h3>
-            <button onClick={handleSort}>
-              {isSortedAsc ? 'Ordenar Descendente' : 'Ordenar Ascendente'}
-            </button>
+            <select
+              name="Ordenar"
+              value={isSortedAsc.toString()}
+              onChange={(e) => handleSortWithOpt(e.target.value === 'true')}
+            >
+              <option value="false">Ordenar por: Descendente</option>
+              <option value="true">Ordenar por: Ascendente</option>
+            </select>
           </div>
 
           <div className="books-list">
             {sortedBooks.length > 0
               ? sortedBooksData().map((book: BookType, index) => (
-                  <Book
-                    key={index}
-                    handleBook={handleBook}
-                    handleFavorite={handleFavorite}
-                    book={book}
-                    favorites={favorites}
-                  />
+                  <Book key={index} book={book} />
                 ))
               : booksData().map((book: BookType, index) => (
-                  <Book
-                    key={index}
-                    handleBook={handleBook}
-                    handleFavorite={handleFavorite}
-                    book={book}
-                    favorites={favorites}
-                  />
+                  <Book key={index} book={book} />
                 ))}
           </div>
         </div>
