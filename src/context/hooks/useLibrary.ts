@@ -5,7 +5,7 @@ export const useLibrary = () => {
   const libraryContext = useContext(LibraryContext);
 
   if (!libraryContext) {
-    throw new Error('useCart must be used within a LibraryProvider');
+    throw new Error('useLibrary must be used within a LibraryProvider');
   }
 
   return libraryContext;
