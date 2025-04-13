@@ -1,5 +1,4 @@
 import React from 'react';
-import './select.css';
 
 interface SelectProps {
   options: { value: string; label: string }[];
