@@ -21,7 +21,7 @@ const Book = ({
 
   useEffect(() => {
     setIsFavorite(libraryState.favorites.has(book.url));
-  }, [libraryState.favorites]);
+  }, [libraryState.favorites, book.url]);
 
   return (
     <div key={key} className="book" onClick={() => handleBook(book)}>
