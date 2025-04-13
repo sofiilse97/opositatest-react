@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/header';
-
+import './MainApp.css';
 const MainApp = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <div className="main-content">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
