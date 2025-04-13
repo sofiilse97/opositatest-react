@@ -2,6 +2,7 @@
   background-color: #1f2937;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .book img {
@@ -18,18 +19,31 @@
 .book h3 {
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 0.25rem;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin: 0;
 }
 
 .book p {
   font-size: 14px;
-  color: #9ca3af;
+  color: var(--grey-1);
   margin: 0;
+}
 
+.favourite-star {
+  background-color: var(--grey-1);
+  padding: 3px 7px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.favourite-star.is-fav {
+  background-color: var(--primary-color);
+}
+
+.favourite-star:hover {
+  background-color: var(--primary-light);
+}
+
+.ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -4,6 +4,7 @@ import defaultBook from '../../../resources/defaultBook.png';
 import './book.css';
 import { useBooks } from '../../../hooks/useBooks';
 import { useLibrary } from '../../../context/hooks/useLibrary';
+import { useEffect, useState } from 'react';
 
 const Book = ({
   key,
@@ -15,6 +16,12 @@ const Book = ({
 }) => {
   const { handleBook, handleFavorite } = useBooks();
   const { libraryState } = useLibrary();
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    setIsFavorite(libraryState.favorites.has(book.url));
+  }, [libraryState.favorites]);
 
   return (
     <div key={key} className="book" onClick={() => handleBook(book)}>
@@ -32,16 +39,9 @@ const Book = ({
               event.stopPropagation();
               handleFavorite(book);
             }}
-            style={{
-              backgroundColor: libraryState.favorites.has(book.url)
-                ? 'gold'
-                : '#ddd',
-              padding: '3px 7px',
-              cursor: 'pointer',
-              borderRadius: '50%',
-            }}
+            className={'favourite-star ' + (isFavorite ? 'is-fav' : '')}
           >
-            {libraryState.favorites.has(book.url) ? '★' : '☆'}
+            {isFavorite ? '★' : '☆'}
           </button>
         </div>
         <img
@@ -53,8 +53,8 @@ const Book = ({
       </div>
 
       <div className="book-info">
-        <h3>{book.name}</h3>
-        <p>{book.authors[0]}</p>
+        <h3 className="ellipsis">{book.name}</h3>
+        <p className="ellipsis">{book.authors[0]}</p>
       </div>
     </div>
   );
