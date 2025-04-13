@@ -6,17 +6,19 @@ const Button = ({
   children,
   disabled = false,
   className = '',
+  variant = 'default',
 }: {
   onClick?: () => void;
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
+  variant?: 'ghost' | 'default';
 }) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`btn ${className}`}
+      className={`btn ${variant} ${className}`}
     >
       {children}
     </button>

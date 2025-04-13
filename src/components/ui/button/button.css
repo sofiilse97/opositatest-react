@@ -1,19 +1,36 @@
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--primary-color);
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
-button:hover {
+button.default {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 10px 1.2em;
+  background-color: var(--primary-color);
+}
+
+button.default:hover {
   background-color: var(--primary-light);
 }
 
-button:focus,
-button:focus-visible {
+button.default:focus,
+button.default:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+button.ghost {
+  font-size: 18px;
+  background-color: transparent;
+  color: var(--primary-color);
+  padding: 0;
+  border: none;
+  padding: 10px 1px;
+}
+
+button.ghost:hover {
+  color: var(--primary-light);
 }
