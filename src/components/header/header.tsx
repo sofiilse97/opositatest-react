@@ -12,7 +12,11 @@ const Header: React.FC = () => {
         <img src={logo} alt="Logo" className="logo" />
       </a>
 
-      <MdAccountCircle size={37} onClick={() => navigate('/myAccount')} />
+      <MdAccountCircle
+        className="account-icon"
+        size={37}
+        onClick={() => navigate('/myAccount')}
+      />
     </div>
   );
 };
