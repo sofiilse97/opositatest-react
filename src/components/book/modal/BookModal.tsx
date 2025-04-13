@@ -1,7 +1,7 @@
 import { getCoverFile } from '../../../api/constants/books';
 import { BookType } from '../../../types/book';
 import { parseYear } from '../../../utils/dates/dateUtil';
-
+import './bookModal.css';
 const BookModal = ({
   selectedBook,
   handleFavorite,
@@ -16,19 +16,7 @@ const BookModal = ({
   if (selectedBook == null) return <></>;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: '20%',
-        left: '50%',
-        transform: 'translate(-50%, -20%)',
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '10px',
-        boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
-        color: 'black',
-      }}
-    >
+    <div className="book-modal">
       <img src={getCoverFile({ isbn: selectedBook.isbn })} />
       <h2>{selectedBook.name}</h2>
       <p>
