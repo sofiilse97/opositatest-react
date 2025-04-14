@@ -13,7 +13,7 @@ const SearchBar = () => {
         value={libraryState.searchQuery || ''}
         onChange={(e) => setLibraryState({ searchQuery: e.target.value })}
       />
-      <Button onClick={libraryState.initBooks} className="updateBtn">
+      <Button onClick={() => {}} className="updateBtn">
         Actualizar libros
       </Button>
     </div>

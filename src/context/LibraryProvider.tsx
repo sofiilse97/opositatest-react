@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LibraryContext } from './LibraryContext';
 
 const initialState: LibraryState = {
+  page: 1,
   books: [],
   searchQuery: '',
   favorites: new Map(),

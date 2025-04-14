@@ -1,4 +1,5 @@
 interface LibraryState {
+  page: number | null;
   books: BookType[] | null;
   searchQuery: string | null;
   favorites: Map<string, object> | null;
