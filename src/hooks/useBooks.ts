@@ -1,12 +1,7 @@
-import { useState } from 'react';
 import { BookType } from '../types/book';
-import { searchBooks } from '../api/constants/books';
 import { useLibrary } from '../context/hooks/useLibrary';
 
 export const useBooks = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
   const { libraryState, setLibraryState } = useLibrary();
   const {
     books,
@@ -17,26 +12,6 @@ export const useBooks = () => {
     isSortedAsc,
     sortedBooks,
   } = libraryState;
-
-  /**
-   * Initialize the books
-   */
-  const initBooks = async () => {
-    setLoading(true);
-
-    try {
-      const response = await searchBooks();
-      const data = await response.json();
-
-      setLibraryState({ books: data });
-      setError(null);
-    } catch (error) {
-      console.error('Error fetching books:', error);
-      setError('Error fetching books');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   /**
    * Filer books by query
@@ -138,16 +113,11 @@ export const useBooks = () => {
   //   };
 
   return {
-    initBooks,
     booksData,
     sortedBooksData,
     handleSort,
     handleSortWithOpt,
     handleBook,
     handleFavorite,
-    loading,
-    setLoading,
-    error,
-    setError,
   };
 };
