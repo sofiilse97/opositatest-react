@@ -2,6 +2,11 @@ import { getCoverFile } from '../../../api/constants/books';
 import { useLibrary } from '../../../context/hooks/useLibrary';
 import { BookType } from '../../../types/book';
 import { parseYear } from '../../../utils/dates/dateUtil';
+import { createPortal } from 'react-dom';
+import { IoMdClose } from 'react-icons/io';
+import Button from '../../ui/button/Button';
+import { useEffect } from 'react';
+
 import './bookModal.css';
 const BookModal = ({
   selectedBook,
@@ -14,62 +19,85 @@ const BookModal = ({
 }) => {
   const { setLibraryState } = useLibrary();
 
-  if (selectedBook == null) return <></>;
+  useEffect(() => {
+    // Bloquear el scroll del fondo cuando el modal está abierto
+    if (selectedBook) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
 
-  return (
-    <div className="book-modal">
-      <img src={getCoverFile({ isbn: selectedBook.isbn })} />
-      <h2>{selectedBook.name}</h2>
-      <p>
-        <strong>Autor:</strong> {selectedBook.authors.join(', ')}
-      </p>
-      <p>
-        <strong>Editorial:</strong> {selectedBook.publisher}
-      </p>
-      <p>
-        <strong>Páginas:</strong> {selectedBook.numberOfPages}
-      </p>
-      <p>
-        <strong>Año:</strong> {parseYear(selectedBook.released)}
-      </p>
-      <button
-        onClick={() => handleFavorite(selectedBook)}
-        style={{
-          backgroundColor: '#007bff',
-          color: 'white',
-          padding: '10px',
-          cursor: 'pointer',
-          marginBottom: '10px',
-        }}
-      >
-        {favorites.has(selectedBook.url)
-          ? 'Quitar de favoritos'
-          : 'Agregar a favoritos'}
-      </button>
-      <button
-        onClick={() => setLibraryState({ selectedBook: null })}
-        style={{
-          backgroundColor: '#ccc',
-          padding: '10px',
-          cursor: 'pointer',
-          display: 'block',
-          marginBottom: '10px',
-        }}
-      >
-        Cerrar
-      </button>
-      <button
-        onClick={() => window.open(selectedBook.url, '_blank')}
-        style={{
-          backgroundColor: '#02874a',
-          color: 'white',
-          padding: '10px',
-          cursor: 'pointer',
-        }}
-      >
-        Abrir API en el navegador
-      </button>
-    </div>
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [selectedBook]);
+
+  if (selectedBook == null) return null;
+
+  return createPortal(
+    <div className="book-modal-overlay">
+      <div className="book-modal-content">
+        <div className="book-modal-close">
+          <button
+            className="close-btn"
+            onClick={() => setLibraryState({ selectedBook: null })}
+          >
+            <IoMdClose />
+          </button>
+        </div>
+        <div className="book-modal-header">
+          <h2>{selectedBook.name}</h2>
+        </div>
+        <div className="book-modal-body">
+          <div className="book-modal-image">
+            <img
+              src={getCoverFile({ isbn: selectedBook.isbn })}
+              alt={`Portada de ${selectedBook.name}`}
+            />
+          </div>
+          <h2>Detalles del libro</h2>
+          <p>
+            <strong>Autor:</strong> {selectedBook.authors.join(', ')}
+          </p>
+          <p>
+            <strong>Editorial:</strong> {selectedBook.publisher}
+          </p>
+          <p>
+            <strong>Año:</strong> {parseYear(selectedBook.released)} |{' '}
+            <strong>País: </strong> {selectedBook.country}
+          </p>
+          <p>
+            <strong>Medio: </strong> {selectedBook.mediaType}
+          </p>
+          <p>
+            <strong>ISBN: </strong> {selectedBook.isbn}
+          </p>
+
+          <h2>Sobre el libro</h2>
+          <p>
+            <strong>Páginas:</strong> {selectedBook.numberOfPages}
+          </p>
+          <p>
+            <strong>Número de personajes:</strong>{' '}
+            {selectedBook.characters.length}
+          </p>
+        </div>
+        <div className="book-modal-footer">
+          <Button
+            variant="outline"
+            onClick={() => window.open(selectedBook.url, '_blank')}
+          >
+            Abrir API en el navegador
+          </Button>
+          <Button onClick={() => handleFavorite(selectedBook)}>
+            {favorites.has(selectedBook.url)
+              ? 'Quitar de favoritos'
+              : 'Agregar a favoritos'}
+          </Button>
+        </div>
+      </div>
+    </div>,
+    document.body
   );
 };
 
