@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './booksList.css';
 import SearchBar from '../../components/search/SearchBar';
 import Book from '../../components/book/book/Book';
 import BookModal from '../../components/book/modal/BookModal';
@@ -8,28 +7,36 @@ import { useBooks } from '../../hooks/useBooks';
 import RecentBooks from '../../components/book/recent/RecentBooks';
 import { useLibrary } from '../../context/hooks/useLibrary';
 import Select from '../../components/ui/select/Select';
+import { useSearchBookQuery } from '../../api/queries/search/useSearchBookQueries';
+import Paginator from '../../components/ui/paginator/Paginator';
+import './booksList.css';
 
 const BooksList: React.FC = () => {
   const {
-    initBooks,
     booksData,
     sortedBooksData,
     handleSortWithOpt,
     handleBook,
     handleFavorite,
-    loading,
-    error,
   } = useBooks();
 
   const { libraryState, setLibraryState } = useLibrary();
 
+  const {
+    data: booksQueryData,
+    isLoading,
+    isError,
+  } = useSearchBookQuery({
+    page: libraryState.page,
+  });
+
   useEffect(() => {
-    initBooks();
-  }, []);
+    setLibraryState({ books: booksQueryData });
+  }, [booksQueryData]);
 
-  if (loading) return <p>Cargando...</p>;
+  if (isLoading) return <p>Cargando...</p>;
 
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (isError) return <p style={{ color: 'red' }}>Ups</p>;
 
   return (
     <>
@@ -65,6 +72,12 @@ const BooksList: React.FC = () => {
                   <Book key={index} book={book} />
                 ))}
           </div>
+          <Paginator
+            backDisabled={libraryState.page === 1}
+            nextDisabled={booksQueryData?.length < 10}
+            setBack={() => setLibraryState({ page: libraryState.page - 1 })}
+            setNext={() => setLibraryState({ page: libraryState.page + 1 })}
+          />
         </div>
 
         {libraryState.selectedBook && (
