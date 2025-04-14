@@ -1,0 +1,21 @@
+.favourites-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.favourites-table th {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.favourites-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.favourites-table img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
