@@ -12,7 +12,7 @@ const Button = ({
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
-  variant?: 'ghost' | 'default';
+  variant?: 'ghost' | 'default' | 'outline';
 }) => {
   return (
     <button
