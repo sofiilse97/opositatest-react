@@ -15,6 +15,11 @@ const initialState: LibraryState = {
 const LibraryProvider = ({ children }: { children: any }) => {
   const [libraryState, setLibraryState] = useState<LibraryState>(initialState);
 
+  /**
+   * Creamos este metodo para actualizar el estado de la libreria
+   * y evitar el uso de setLibraryState en cada componente que lo necesite.
+   * @param value - Partial<LibraryState>
+   */
   const updateLibraryState = (value: Partial<LibraryState>) => {
     setLibraryState((prevState) => ({
       ...prevState,
