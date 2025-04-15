@@ -1,4 +1,6 @@
-import { API_BASE_URL, API_COVER_BOOKS } from './constants';
+import { API_BASE_URL, API_COVER_BOOKS } from '../constants/constants';
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const searchBooks = async ({
   page = 1,
@@ -9,8 +11,10 @@ export const searchBooks = async ({
   size?: number | undefined;
   searchQuery?: string | undefined;
 } = {}) => {
+  await delay(1000);
+
   const response = await fetch(
-    `${API_BASE_URL}/api/books?page=${page}&size=${size}`
+    `${API_BASE_URL}/api/books?page=${page}&pageSize=${size}`
   );
 
   if (!response.ok) {
