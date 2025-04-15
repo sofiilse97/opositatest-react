@@ -8,7 +8,6 @@ export const useBooks = () => {
     searchQuery,
     favorites,
     recentBooks,
-    selectedBook,
     isSortedAsc,
     sortedBooks,
   } = libraryState;
@@ -74,30 +73,25 @@ export const useBooks = () => {
    * @param bk the book to set as selected
    */
   const handleBook = (bk: BookType) => {
-    // setSelectedBook(bk);
-    // // add return to identify correctly the change
-    // setRecentBooks((prev) => {
-    //   const newSet = new Set(prev);
-    //   newSet.add(bk.url);
-    //   return newSet;
-    // });
+    const newRecents = new Map(recentBooks || []);
+    newRecents.set(bk.url, bk);
 
     setLibraryState({
       selectedBook: bk,
-      recentBooks: new Set([...(recentBooks || []), bk.url]),
+      recentBooks: newRecents,
     });
   };
 
   /**
    * Add or remove a book from favorites
-   * @param b the book to add or remove
+   * @param bk the book to add or remove
    */
-  const handleFavorite = (b: BookType) => {
+  const handleFavorite = (bk: BookType) => {
     const newFavorites = new Map(favorites || []);
-    if (newFavorites.has(b.url)) {
-      newFavorites.delete(b.url);
+    if (newFavorites.has(bk.url)) {
+      newFavorites.delete(bk.url);
     } else {
-      newFavorites.set(b.url, b);
+      newFavorites.set(bk.url, bk);
     }
 
     setLibraryState({ favorites: newFavorites });
