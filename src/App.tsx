@@ -7,8 +7,9 @@ import LibraryProvider from './context/LibraryProvider';
 import MainApp from './layouts/MainApp';
 import BooksList from './pages/booksList/BooksList';
 import MyAccount from './pages/myAccount/MyAccount';
-
+import CharacterList from './pages/charactersList/CharacterList';
 import './App.css';
+
 // Create a client
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => {
               <Routes>
                 <Route element={<MainApp />}>
                   <Route index element={<BooksList />} />
+                  <Route path="/characters" element={<CharacterList />} />
                   <Route path="/myAccount" element={<MyAccount />} />
                 </Route>
               </Routes>

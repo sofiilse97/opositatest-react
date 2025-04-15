@@ -4,20 +4,29 @@ import { MdAccountCircle } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 
 import './header.css';
+import Button from '../ui/button/Button';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className="header">
-      <a href="/">
-        <img src={logo} alt="Logo" className="logo" />
-      </a>
+      <div className="header-left">
+        <a href="/">
+          <img src={logo} alt="Logo" className="logo" />
+        </a>
+        <Button variant="ghost">Librería</Button>
+        <Button variant="ghost" onClick={() => navigate('/characters')}>
+          Personajes
+        </Button>
+      </div>
 
-      <MdAccountCircle
-        className="account-icon"
-        size={37}
-        onClick={() => navigate('/myAccount')}
-      />
+      <div>
+        <MdAccountCircle
+          className="account-icon"
+          size={37}
+          onClick={() => navigate('/myAccount')}
+        />
+      </div>
     </div>
   );
 };
