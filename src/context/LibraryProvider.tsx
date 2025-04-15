@@ -6,7 +6,7 @@ const initialState: LibraryState = {
   books: [],
   searchQuery: '',
   favorites: new Map(),
-  recentBooks: new Set(),
+  recentBooks: new Map(),
   selectedBook: null,
   isSortedAsc: true,
   sortedBooks: [],
