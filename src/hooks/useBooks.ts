@@ -1,5 +1,5 @@
-import { BookType } from '../types/book';
-import { useLibrary } from '../context/hooks/useLibrary';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { BookType } from '@/types/book';
 
 export const useBooks = () => {
   const { libraryState, setLibraryState } = useLibrary();

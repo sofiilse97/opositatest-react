@@ -1,4 +1,4 @@
-import Button from '../button/Button';
+import Button from '@/components/ui/button/Button';
 import './paginator.css';
 
 const Paginator = ({

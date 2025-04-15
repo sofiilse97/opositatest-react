@@ -1,13 +1,13 @@
-import { getCoverFile } from '../../../api/constants/books';
-import { useLibrary } from '../../../context/hooks/useLibrary';
-import { BookType } from '../../../types/book';
-import { parseYear } from '../../../utils/dates/dateUtil';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
-import Button from '../../ui/button/Button';
-import { useEffect } from 'react';
-
+import { BookType } from '@/types/book';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { getCoverFile } from '@/api/constants/books';
+import { parseYear } from '@/utils/dates/dateUtil';
+import Button from '@/components/ui/button/Button';
 import './bookModal.css';
+
 const BookModal = ({
   selectedBook,
   handleFavorite,

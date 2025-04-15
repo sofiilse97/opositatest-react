@@ -1,8 +1,9 @@
 import React from 'react';
-import './Header.css';
-import logo from '../../resources/logo.png';
+import logo from '@/assets/logo.png';
 import { MdAccountCircle } from 'react-icons/md';
 import { useNavigate } from 'react-router';
+
+import './header.css';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

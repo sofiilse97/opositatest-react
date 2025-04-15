@@ -1,13 +1,12 @@
-import React from 'react';
-import { useBooks } from '../../hooks/useBooks';
-import MyFavourites from '../../components/account/favourites/MyFavourites';
-import { useLibrary } from '../../context/hooks/useLibrary';
+import MyFavourites from '@/components/account/favourites/MyFavourites';
+import User from '@/components/account/user/User';
+import Button from '@/components/ui/button/Button';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { useBooks } from '@/hooks/useBooks';
 import { IoMdArrowBack } from 'react-icons/io';
-import Button from '../../components/ui/button/Button';
 import { useNavigate } from 'react-router';
-import User from '../../components/account/user/User';
 
-const MyAccount: React.FC = () => {
+const MyAccount = () => {
   const { handleBook, handleFavorite } = useBooks();
 
   const { libraryState } = useLibrary();

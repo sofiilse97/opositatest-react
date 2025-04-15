@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import SearchBar from '../../components/search/SearchBar';
-import Book from '../../components/book/book/Book';
-import BookModal from '../../components/book/modal/BookModal';
-import { BookType } from '../../types/book.d';
-import { useBooks } from '../../hooks/useBooks';
-import RecentBooks from '../../components/book/recent/RecentBooks';
-import { useLibrary } from '../../context/hooks/useLibrary';
-import Select from '../../components/ui/select/Select';
-import { useSearchBookQuery } from '../../api/queries/search/useSearchBookQueries';
-import Paginator from '../../components/ui/paginator/Paginator';
+import { useBooks } from '@/hooks/useBooks';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { useSearchBookQuery } from '@/api/queries/search/useSearchBookQueries';
+import SearchBar from '@/components/search/SearchBar';
+import RecentBooks from '@/components/book/recent/RecentBooks';
+import Select from '@/components/ui/select/Select';
+import { BookType } from '@/types/book';
+import Book from '@/components/book/book/Book';
+import Paginator from '@/components/ui/paginator/Paginator';
+import BookModal from '@/components/book/modal/BookModal';
+
 import './booksList.css';
 
 const BooksList: React.FC = () => {

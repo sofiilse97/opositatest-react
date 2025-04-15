@@ -1,14 +1,14 @@
-import BooksList from './pages/booksList/BooksList';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import './App.css';
-import LibraryProvider from './context/LibraryProvider';
-import MyAccount from './pages/myAccount/MyAccount';
-import MainApp from './layouts/MainApp';
-import ErrorBoundary from './components/ui/error/ErrorBoundary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
+import ErrorBoundary from './components/ui/error/ErrorBoundary';
+import LibraryProvider from './context/LibraryProvider';
+import MainApp from './layouts/MainApp';
+import BooksList from './pages/booksList/BooksList';
+import MyAccount from './pages/myAccount/MyAccount';
 
+import './App.css';
 // Create a client
 const queryClient = new QueryClient();
 

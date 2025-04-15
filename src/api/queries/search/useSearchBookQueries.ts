@@ -1,6 +1,6 @@
 export const SEARCH_BOOK_QUERY_KEY = 'searchBookQueryKey';
+import { searchBooks } from '@/api/constants/books';
 import { useQuery } from '@tanstack/react-query';
-import { searchBooks } from '../../constants/books';
 
 export const useSearchBookQuery = ({
   page = 1,

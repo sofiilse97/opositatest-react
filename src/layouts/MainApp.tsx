@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/header';
+import Header from '@/components/header/header';
+import Footer from '@/components/footer/Footer';
+
 import './MainApp.css';
 const MainApp = () => {
   return (

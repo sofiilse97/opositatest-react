@@ -1,10 +1,10 @@
-import { getCoverFile } from '../../../api/constants/books';
-import { BookType } from '../../../types/book';
-import defaultBook from '../../../resources/defaultBook.png';
-import './book.css';
-import { useBooks } from '../../../hooks/useBooks';
-import { useLibrary } from '../../../context/hooks/useLibrary';
 import { useEffect, useState } from 'react';
+import './book.css';
+import { BookType } from '@/types/book';
+import { useBooks } from '@/hooks/useBooks';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { getCoverFile } from '@/api/constants/books';
+import defaultBook from '@/assets/default-book.png';
 
 const Book = ({
   key,

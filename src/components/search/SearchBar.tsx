@@ -1,6 +1,6 @@
-import { useLibrary } from '../../context/hooks/useLibrary';
-import Button from '../ui/button/Button';
+import { useLibrary } from '@/context/hooks/useLibrary';
 import './searchBar.css';
+import Button from '@/components/ui/button/Button';
 
 const SearchBar = () => {
   const { libraryState, setLibraryState } = useLibrary();

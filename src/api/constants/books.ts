@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_COVER_BOOKS } from './constants';
+import { API_BASE_URL } from './constants';
 
 export const searchBooks = async ({
   page = 1,

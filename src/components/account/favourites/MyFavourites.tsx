@@ -1,12 +1,11 @@
 import React from 'react';
-import { useBooks } from '../../../hooks/useBooks';
-import { useLibrary } from '../../../context/hooks/useLibrary';
-import { getCoverFile } from '../../../api/constants/books';
-import Button from '../../ui/button/Button';
-import { BookType } from '../../../types/book';
-
+import { useBooks } from '@/hooks/useBooks';
+import { useLibrary } from '@/context/hooks/useLibrary';
+import { BookType } from '@/types/book';
+import { getCoverFile } from '@/api/constants/books';
+import Button from '@/components/ui/button/Button';
+import BookModal from '@/components/book/modal/BookModal';
 import './myFavourites.css';
-import BookModal from '../../book/modal/BookModal';
 
 const MyFavourites: React.FC = () => {
   const { handleBook, handleFavorite } = useBooks();

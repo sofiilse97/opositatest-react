@@ -1,4 +1,4 @@
-import { BookType } from '../../../types/book';
+import { BookType } from '@/types/book';
 
 const RecentBooks = ({
   recentBooks,
