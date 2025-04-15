@@ -7,11 +7,6 @@
   margin: 0 auto;
 }
 
-.books-list {
-  display: grid;
-  gap: 2rem;
-}
-
 .result-container {
   display: flex;
   flex-direction: row;
@@ -30,23 +25,5 @@
     option {
       cursor: pointer;
     }
-  }
-}
-
-@media (min-width: 640px) {
-  .books-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .books-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .books-list {
-    grid-template-columns: repeat(4, 1fr);
   }
 }

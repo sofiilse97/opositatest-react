@@ -11,6 +11,7 @@ import Paginator from '@/components/ui/paginator/Paginator';
 import BookModal from '@/components/book/modal/BookModal';
 
 import './booksList.css';
+import List from '@/components/ui/list/List';
 
 const BooksList: React.FC = () => {
   const {
@@ -63,7 +64,7 @@ const BooksList: React.FC = () => {
             />
           </div>
 
-          <div className="books-list">
+          <List>
             {libraryState.sortedBooks.length > 0
               ? sortedBooksData().map((book: BookType, index) => (
                   <Book key={index} book={book} />
@@ -71,7 +72,8 @@ const BooksList: React.FC = () => {
               : booksData().map((book: BookType, index) => (
                   <Book key={index} book={book} />
                 ))}
-          </div>
+          </List>
+
           <Paginator
             backDisabled={libraryState.page === 1}
             nextDisabled={booksQueryData?.length < 10}
