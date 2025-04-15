@@ -5,6 +5,7 @@ import { useBooks } from '@/hooks/useBooks';
 import { useLibrary } from '@/context/hooks/useLibrary';
 import { getCoverFile } from '@/api/constants/books';
 import defaultBook from '@/resources/defaultBook.png';
+import BookImage from '@/components/ui/image/BookImage';
 
 const Book = ({
   key,
@@ -44,12 +45,7 @@ const Book = ({
             {isFavorite ? '★' : '☆'}
           </button>
         </div>
-        <img
-          src={getCoverFile({ isbn: book.isbn })}
-          style={{
-            backgroundImage: `url(${defaultBook})`,
-          }}
-        />
+        <BookImage src={getCoverFile({ isbn: book.isbn })} />
       </div>
 
       <div className="book-info">

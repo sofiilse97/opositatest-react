@@ -13,11 +13,12 @@ const MyFavourites: React.FC = () => {
 
   return (
     <div>
-      <h3>Mis libros favoritos</h3>
+      <h3 className="favourites">
+        Mis libros favoritos: {libraryState.favorites.size}
+      </h3>
 
       {libraryState.favorites.size > 0 ? (
         <>
-          <p>{libraryState.favorites.size} libros favoritos</p>
           <table className="favourites-table">
             <thead>
               <tr>

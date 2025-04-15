@@ -1,3 +1,7 @@
+.favourites-title {
+  margin: 0;
+}
+
 .favourites-table {
   width: 100%;
   border-collapse: collapse;

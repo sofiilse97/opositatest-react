@@ -6,6 +6,8 @@ import { useBooks } from '@/hooks/useBooks';
 import { IoMdArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router';
 
+import './myAccount.css';
+
 const MyAccount = () => {
   const { handleBook, handleFavorite } = useBooks();
 
@@ -27,6 +29,8 @@ const MyAccount = () => {
       <h2>Mi cuenta</h2>
 
       <User name="test" email="test@email.com" profilePicture={null} />
+
+      <div className="separator"></div>
 
       <MyFavourites />
     </div>
