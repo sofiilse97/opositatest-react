@@ -1,4 +1,4 @@
-import defaultBook from '@/assets/default-book.png';
+import defaultBook from '@/resources/defaultBook.png';
 
 const BookImage = ({ src }: { src: string }) => {
   return (

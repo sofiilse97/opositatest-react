@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '@/assets/logo.png';
+import logo from '@/resources/logo.png';
 import { MdAccountCircle } from 'react-icons/md';
 import { useNavigate } from 'react-router';
 

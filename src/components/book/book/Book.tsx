@@ -4,7 +4,7 @@ import { BookType } from '@/types/book';
 import { useBooks } from '@/hooks/useBooks';
 import { useLibrary } from '@/context/hooks/useLibrary';
 import { getCoverFile } from '@/api/constants/books';
-import defaultBook from '@/assets/default-book.png';
+import defaultBook from '@/resources/defaultBook.png';
 
 const Book = ({
   key,
