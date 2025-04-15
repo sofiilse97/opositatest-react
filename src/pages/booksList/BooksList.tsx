@@ -47,7 +47,6 @@ const BooksList: React.FC = () => {
           {libraryState.recentBooks.size > 0 && (
             <RecentBooks
               recentBooks={libraryState.recentBooks}
-              books={libraryState.books}
               handleBook={handleBook}
             />
           )}
