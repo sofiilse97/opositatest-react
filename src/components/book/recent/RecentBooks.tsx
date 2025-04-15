@@ -2,7 +2,7 @@ import { BookType } from '@/types/book';
 import BookImage from '@/components/ui/image/BookImage';
 
 import './recentBooks.css';
-import { getCoverFile } from '@/api/constants/books';
+import { getCoverFile } from '@/api/search/books';
 
 const RecentBooks = ({
   recentBooks,

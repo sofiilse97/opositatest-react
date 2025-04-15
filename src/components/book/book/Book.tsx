@@ -3,8 +3,7 @@ import './book.css';
 import { BookType } from '@/types/book';
 import { useBooks } from '@/hooks/useBooks';
 import { useLibrary } from '@/context/hooks/useLibrary';
-import { getCoverFile } from '@/api/constants/books';
-import defaultBook from '@/resources/defaultBook.png';
+import { getCoverFile } from '@/api/search/books';
 import BookImage from '@/components/ui/image/BookImage';
 
 const Book = ({

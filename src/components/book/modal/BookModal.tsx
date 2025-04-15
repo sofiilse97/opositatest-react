@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 import { BookType } from '@/types/book';
 import { useLibrary } from '@/context/hooks/useLibrary';
-import { getCoverFile } from '@/api/constants/books';
+import { getCoverFile } from '@/api/search/books';
 import { parseYear } from '@/utils/dates/dateUtil';
 import Button from '@/components/ui/button/Button';
 import './bookModal.css';

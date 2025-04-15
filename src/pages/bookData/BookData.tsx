@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { getCoverFile, searchBook } from '../../api/constants/books';
+import { getCoverFile, searchBook } from '../../api/search/books';
 import { BookType } from '../../types/book';
-import defaultBook from '../../resources/defaultBook.png';
-import Book from '../../components/book/book/Book';
 import { parseYear } from '../../utils/dates/dateUtil';
 
 import './bookData.css';
