@@ -3,7 +3,7 @@ interface LibraryState {
   books: BookType[] | null;
   searchQuery: string | null;
   favorites: Map<string, object> | null;
-  recentBooks: Set<string> | null;
+  recentBooks: Map<string, object> | null;
   selectedBook: BookType | null;
   isSortedAsc: boolean | null;
   sortedBooks: BookType[] | null;
