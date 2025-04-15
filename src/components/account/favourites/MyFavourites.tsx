@@ -2,7 +2,7 @@ import React from 'react';
 import { useBooks } from '@/hooks/useBooks';
 import { useLibrary } from '@/context/hooks/useLibrary';
 import { BookType } from '@/types/book';
-import { getCoverFile } from '@/api/constants/books';
+import { getCoverFile } from '@/api/search/books';
 import Button from '@/components/ui/button/Button';
 import BookModal from '@/components/book/modal/BookModal';
 import './myFavourites.css';
