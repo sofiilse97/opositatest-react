@@ -17,7 +17,7 @@ const RecentBooks = ({
       <h3>Recientes</h3>
       <div className="recent-books-container">
         {Array.from(recentBooks).map((url) => {
-          const book = books.find((b) => b.url === url);
+          const book = books?.find((b) => b.url === url);
           return book ? (
             <div
               className="recent-book"
