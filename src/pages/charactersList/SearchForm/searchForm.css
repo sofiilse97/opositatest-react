@@ -1,0 +1,22 @@
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters-container h4,
+.filters-container p {
+  margin: 0;
+}
+
+.filters-container .filter {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.filters-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

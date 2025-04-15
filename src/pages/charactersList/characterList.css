@@ -1,0 +1,21 @@
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  input[type='text'] {
+    width: 100%;
+    padding: 12px 16px;
+    max-width: 500px;
+    border-radius: 9999px;
+    border: 1px solid var(--grey-1);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+  }
+}
+
+.search > button {
+  width: 250px;
+}
