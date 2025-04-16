@@ -16,7 +16,7 @@ const CharacterCard = ({
   return (
     <div className="character-card">
       <div className="character-image">
-        <MdAccountCircle className="account-icon" size={50} />
+        <MdAccountCircle size={50} />
       </div>
       <h2 className="character-name">{!!name ? name : aliases[0]}</h2>
       <p className="character-detail">
