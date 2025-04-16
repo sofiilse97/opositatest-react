@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 import { BookType } from '@/types/book';
@@ -18,6 +18,14 @@ const BookModal = ({
   favorites: Set<string>;
 }) => {
   const { setLibraryState } = useLibrary();
+
+  const [isFavourite, setIsFavourite] = useState(
+    (selectedBook && favorites.has(selectedBook?.url)) ?? false
+  );
+
+  useEffect(() => {
+    if (selectedBook) setIsFavourite(favorites.has(selectedBook?.url));
+  }, [favorites]);
 
   useEffect(() => {
     // Bloquear el scroll del fondo cuando el modal está abierto
@@ -89,10 +97,11 @@ const BookModal = ({
           >
             Abrir API en el navegador
           </Button>
-          <Button onClick={() => handleFavorite(selectedBook)}>
-            {favorites.has(selectedBook.url)
-              ? 'Quitar de favoritos'
-              : 'Agregar a favoritos'}
+          <Button
+            variant={isFavourite ? 'outline' : 'default'}
+            onClick={() => handleFavorite(selectedBook)}
+          >
+            {isFavourite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           </Button>
         </div>
       </div>
