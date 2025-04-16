@@ -6,10 +6,11 @@ import { Character } from '@/types/character';
 import SearchForm from './SearchForm/SearchForm';
 import Button from '@/components/ui/button/Button';
 import List from '@/components/ui/list/List';
+import { CharacterSearchParams } from '@/api/queries/types/character';
 
 import './characterList.css';
 const CharacterList = () => {
-  const [search, setSearch] = useState({
+  const [search, setSearch] = useState<CharacterSearchParams>({
     page: 1,
     size: 15,
     name: '',
@@ -98,13 +99,13 @@ const CharacterList = () => {
           {characterQueryData?.length > 0 && (
             <Paginator
               backDisabled={search.page === 1}
-              nextDisabled={characterQueryData?.length < search.size}
+              nextDisabled={characterQueryData?.length < search?.size}
               setBack={() => {
-                setSearch((prev) => ({ ...prev, page: prev.page - 1 }));
+                setSearch((prev) => ({ ...prev, page: prev?.page - 1 }));
                 setShowFilters(false);
               }}
               setNext={() => {
-                setSearch((prev) => ({ ...prev, page: prev.page + 1 }));
+                setSearch((prev) => ({ ...prev, page: prev?.page + 1 }));
                 setShowFilters(false);
               }}
             />
