@@ -1,7 +1,10 @@
 .filters-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  background-color: var(--card-background);
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .filters-container h4,
@@ -9,10 +12,33 @@
   margin: 0;
 }
 
-.filters-container .filter {
+.filters {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+  border: 1px solid var(--black-1);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.filters label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.filters .filter-item {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .filters-buttons {

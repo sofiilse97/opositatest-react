@@ -14,7 +14,7 @@ const SearchForm = ({
     gender: string;
     born: string;
     died: string;
-    isAlive: boolean;
+    isAlive?: boolean;
   };
   setSearch: React.Dispatch<
     React.SetStateAction<{
@@ -24,22 +24,45 @@ const SearchForm = ({
       gender: string;
       born: string;
       died: string;
-      isAlive: boolean;
+      isAlive?: boolean;
     }>
   >;
 }) => {
   const [internalState, setInternalState] = useState(search);
 
+  const handleCleanFilters = () => {
+    setInternalState({
+      page: 1,
+      size: 15,
+      name: '',
+      gender: '',
+      born: '',
+      died: '',
+    });
+    setSearch((prev) => ({
+      ...prev,
+      page: 1,
+      size: 15,
+      name: '',
+      gender: '',
+      born: '',
+      died: '',
+    }));
+  };
+
+  const handleApplyFilters = () => {
+    setSearch((prev) => ({ ...prev, ...internalState }));
+  };
+
   return (
     <div className="filters-container">
       <div>
         <h4>Filtrar búsqueda</h4>
-        <p>Filtra los personajes por nombre y otros criterios</p>
       </div>
       <div className="filters">
         {/* Select para filtrar por género */}
-        <label>
-          Género:
+        <div className="filter-item">
+          <label>Género</label>
           <select
             value={internalState.gender}
             onChange={(e) =>
@@ -49,12 +72,11 @@ const SearchForm = ({
             <option value="">Todos</option>
             <option value="female">Femenino</option>
             <option value="male">Masculino</option>
-            <option value="unknown">Desconocido</option>
           </select>
-        </label>
-        {/* Input para filtrar por año de nacimiento */}
-        <label>
-          Año de nacimiento:
+        </div>
+        <div className="filter-item">
+          {/* Input para filtrar por año de nacimiento */}
+          <label>Año de nacimiento</label>
           <input
             type="number"
             placeholder="Año de nacimiento"
@@ -63,10 +85,10 @@ const SearchForm = ({
               setInternalState((prev) => ({ ...prev, born: e.target.value }))
             }
           />
-        </label>
-        {/* Input para filtrar por año de muerte */}
-        <label>
-          Año de muerte:
+        </div>
+        <div className="filter-item">
+          {/* Input para filtrar por año de muerte */}
+          <label>Año de muerte</label>
           <input
             type="number"
             placeholder="Año de muerte"
@@ -75,31 +97,13 @@ const SearchForm = ({
               setInternalState((prev) => ({ ...prev, died: e.target.value }))
             }
           />
-        </label>
-        {/* Checkbox para filtrar por "Sigue vivo"
-      <label>
-        <input
-          type="checkbox"
-          checked={internalState.isAlive}
-          onChange={(e) =>
-            setInternalState((prev) => ({ ...prev, isAlive: e.target.checked }))
-          }
-        />
-        Sigue vivo
-      </label> */}
+        </div>
       </div>
       <div className="filters-buttons">
-        <Button
-          variant="outline"
-          onClick={() => setSearch((prev) => ({ ...prev, ...internalState }))}
-        >
+        <Button variant="outline" onClick={handleCleanFilters}>
           Limpiar filtros
         </Button>
-        <Button
-          onClick={() => setSearch((prev) => ({ ...prev, ...internalState }))}
-        >
-          Aplicar filtros
-        </Button>
+        <Button onClick={handleApplyFilters}>Aplicar filtros</Button>
       </div>
     </div>
   );

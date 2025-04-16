@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Paginator from '@/components/ui/paginator/Paginator';
 import { useSearchCharacterQuery } from '@/api/queries/search/useSearchCharacterQueries';
 import CharacterCard from '@/components/character/CharacterCard';
 import { Character } from '@/types/character';
 import SearchForm from './SearchForm/SearchForm';
-
-import './characterList.css';
 import Button from '@/components/ui/button/Button';
 import List from '@/components/ui/list/List';
-const CharacterList: React.FC = () => {
+
+import './characterList.css';
+const CharacterList = () => {
   const [search, setSearch] = useState({
     page: 1,
     size: 15,
@@ -16,7 +16,6 @@ const CharacterList: React.FC = () => {
     gender: '',
     born: '',
     died: '',
-    isAlive: false,
   });
 
   const [showFilters, setShowFilters] = useState(false);
@@ -48,7 +47,6 @@ const CharacterList: React.FC = () => {
     gender: search.gender,
     born: search.born,
     died: search.died,
-    isAlive: search.isAlive,
   });
 
   if (isLoading) return <p>Cargando...</p>;
@@ -73,7 +71,7 @@ const CharacterList: React.FC = () => {
                 variant="outline"
                 onClick={() => setShowFilters(!showFilters)}
               >
-                Mostrar filtros
+                {showFilters ? 'Ocultar filtros' : 'Mostrar filtros'}
               </Button>
             </div>
           </div>
@@ -100,16 +98,20 @@ const CharacterList: React.FC = () => {
             ))}
           </List>
 
-          <Paginator
-            backDisabled={search.page === 1}
-            nextDisabled={characterQueryData?.length < search.size}
-            setBack={() =>
-              setSearch((prev) => ({ ...prev, page: prev.page - 1 }))
-            }
-            setNext={() =>
-              setSearch((prev) => ({ ...prev, page: prev.page + 1 }))
-            }
-          />
+          {characterQueryData?.length > 0 && (
+            <Paginator
+              backDisabled={search.page === 1}
+              nextDisabled={characterQueryData?.length < search.size}
+              setBack={() => {
+                setSearch((prev) => ({ ...prev, page: prev.page - 1 }));
+                setShowFilters(false);
+              }}
+              setNext={() => {
+                setSearch((prev) => ({ ...prev, page: prev.page + 1 }));
+                setShowFilters(false);
+              }}
+            />
+          )}
         </div>
       </div>
     </>

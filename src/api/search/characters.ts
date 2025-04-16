@@ -25,7 +25,6 @@ export const searchCharacters = async ({
   if (gender) params.append('gender', gender);
   if (born) params.append('born', born);
   if (died) params.append('died', died);
-  if (isAlive !== undefined) params.append('isAlive', isAlive.toString());
 
   const url = `${API_BASE_URL}/api/characters?${params.toString()}`;
   const response = await fetch(url);
