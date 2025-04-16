@@ -1,5 +1,6 @@
 import { searchCharacters } from '@/api/search/characters';
 import { useQuery } from '@tanstack/react-query';
+import { CharacterSearchParams } from '../types/character';
 
 export const SEARCH_CHARACTER_QUERY_KEY = 'searchCharacter';
 
@@ -10,16 +11,7 @@ export const useSearchCharacterQuery = ({
   gender = '',
   born = '',
   died = '',
-  isAlive = false,
-}: {
-  page?: number | undefined;
-  size?: number | undefined;
-  name?: string | undefined;
-  gender?: string | undefined;
-  born?: string | undefined;
-  died?: string | undefined;
-  isAlive?: boolean | undefined;
-} = {}) =>
+}: CharacterSearchParams = {}) =>
   useQuery({
     queryKey: [
       SEARCH_CHARACTER_QUERY_KEY,
@@ -29,8 +21,6 @@ export const useSearchCharacterQuery = ({
       gender,
       born,
       died,
-      isAlive,
     ],
-    queryFn: () =>
-      searchCharacters({ page, size, name, gender, born, died, isAlive }),
+    queryFn: () => searchCharacters({ page, size, name, gender, born, died }),
   });

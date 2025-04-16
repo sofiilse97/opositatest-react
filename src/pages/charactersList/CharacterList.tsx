@@ -22,18 +22,15 @@ const CharacterList = () => {
 
   const [debouncedSearch, setDebouncedSearch] = useState(search.name);
 
-  const debouncedSearchFn = () => {
+  useEffect(() => {
     const handler = setTimeout(() => {
+      setSearch((prev) => ({ ...prev, page: 1 }));
       setDebouncedSearch(search.name);
     }, 500);
 
     return () => {
       clearTimeout(handler);
     };
-  };
-
-  useEffect(() => {
-    debouncedSearchFn();
   }, [search.name]);
 
   const {

@@ -3,48 +3,30 @@ import { useState } from 'react';
 
 import './searchForm.css';
 import Select from '@/components/ui/select/Select';
+import { CharacterSearchParams } from '@/api/queries/types/character';
 
 const SearchForm = ({
   search,
   setSearch,
 }: {
-  search: {
-    page: number;
-    size: number;
-    name: string;
-    gender: string;
-    born: string;
-    died: string;
-    isAlive?: boolean;
-  };
-  setSearch: React.Dispatch<
-    React.SetStateAction<{
-      page: number;
-      size: number;
-      name: string;
-      gender: string;
-      born: string;
-      died: string;
-      isAlive?: boolean;
-    }>
-  >;
+  search: CharacterSearchParams;
+  setSearch: React.Dispatch<React.SetStateAction<CharacterSearchParams>>;
 }) => {
   const [internalState, setInternalState] = useState(search);
 
   const handleCleanFilters = () => {
-    setInternalState({
+    setInternalState((prev) => ({
+      ...prev,
       page: 1,
       size: 15,
-      name: '',
       gender: '',
       born: '',
       died: '',
-    });
+    }));
     setSearch((prev) => ({
       ...prev,
       page: 1,
       size: 15,
-      name: '',
       gender: '',
       born: '',
       died: '',
@@ -52,7 +34,7 @@ const SearchForm = ({
   };
 
   const handleApplyFilters = () => {
-    setSearch((prev) => ({ ...prev, ...internalState }));
+    setSearch((prev) => ({ ...prev, ...internalState, page: 1, size: 15 }));
   };
 
   return (
