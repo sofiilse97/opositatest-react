@@ -47,6 +47,7 @@ const BookModal = ({
       <div className="book-modal-content">
         <div className="book-modal-close">
           <button
+            data-testid="book-modal-close-btn"
             className="close-btn"
             onClick={() => setLibraryState({ selectedBook: null })}
           >
