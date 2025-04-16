@@ -202,6 +202,12 @@ He añadido también 3 filtros para poder filtrar la búsqueda
 - Filtro de año de nacimiento.
 - Filtro de año de muerte.
 
+# Mejora 9 - Test
+
+He visto que había un fichero de test y que estaba instalado `vitest` y `testing Library`, por lo que me puse a lanzar los test y vi que no me funcionaban para poder enterarme deourarlo en el navegador he instalado `@vitest/browser` y `@playwright/test`. También configure el timeout del async en el fichero `src\setupTests.ts`.
+
+En primera instancia los test fallaban porque había añadido `react query` y un `context` que no estaban disponibles en el test, ya que en la aplicación se inicializan globalmente y en el componente no estaban. También había fallos menores al cambiar el diseño de la página.
+
 # Posibles futuras mejoras
 
 Después de los cambios realizados se podrían seguir mejorando varias cosas en la aplicación:
