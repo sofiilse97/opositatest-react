@@ -66,12 +66,8 @@ const BooksList: React.FC = () => {
 
           <List>
             {libraryState.sortedBooks.length > 0
-              ? sortedBooksData().map((book: BookType, index) => (
-                  <Book key={index} book={book} />
-                ))
-              : booksData().map((book: BookType, index) => (
-                  <Book key={index} book={book} />
-                ))}
+              ? sortedBooksData().map((book: BookType) => <Book book={book} />)
+              : booksData().map((book: BookType) => <Book book={book} />)}
           </List>
 
           <Paginator

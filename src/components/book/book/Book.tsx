@@ -6,14 +6,7 @@ import { useLibrary } from '@/context/hooks/useLibrary';
 import { getCoverFile } from '@/api/search/books';
 import BookImage from '@/components/ui/image/BookImage';
 
-const Book = ({
-  key,
-  book,
-}: {
-  key: string | number;
-
-  book: BookType;
-}) => {
+const Book = ({ book }: { book: BookType }) => {
   const { handleBook, handleFavorite } = useBooks();
   const { libraryState } = useLibrary();
 
@@ -24,7 +17,7 @@ const Book = ({
   }, [libraryState.favorites, book.url]);
 
   return (
-    <div key={key} className="book" onClick={() => handleBook(book)}>
+    <div key={book.url} className="book" onClick={() => handleBook(book)}>
       <div style={{ position: 'relative' }}>
         <div
           style={{
