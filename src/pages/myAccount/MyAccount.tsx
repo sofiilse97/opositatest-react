@@ -15,7 +15,7 @@ const MyAccount = () => {
         <Button variant="ghost" onClick={() => navigate('/')}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <IoMdArrowBack />
-            Volver
+            Volver a la libería
           </div>
         </Button>
       </div>
