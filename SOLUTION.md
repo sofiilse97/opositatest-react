@@ -150,3 +150,62 @@ Con React Query, se facilita el trabajo de almacenamiento en caché, gestión de
 ### Búsqueda de libros
 
 Parametricé la búsqueda de libros para acceder a distintas páginas de la API.
+
+# Mejora 8 - Refactor de "LibraryList"
+
+Además de lo mencionado en el uso del Context, también refactoricé el componente LibraryList.
+
+Para ello:
+
+- Creé nuevos componentes de UI reutilizables:
+  - Botones, Selectores, Paginador, Listado, etc. Estos componentes se encuentran bajo `src/components/ui/*`.
+- Creé los componentes del libro reutilizables:
+  - Creación de BookModal.
+  - Creación del componente Book.
+  - Creación del componente RecentBooks.
+
+### BookModal
+
+Este componente es una popup/diálogo que muestra más información del libro.
+
+Para la creación de este componente me basé en lo que ya existía en la aplicación por defecto, mejorando la interfaz que ya existía.
+
+### Book
+
+Este componente es la tarjeta básica del libro que vemos cuando accedemos a la librería.
+
+Como información del libro, contiene la portada, el título y el autor. Luego tiene 2 acciones: añadir el libro a favoritos y abrir la popup del libro.
+
+### RecentBooks
+
+Este componente contiene la información de los libros recientes abiertos.
+
+## Mejora 9 - Nuevas funcionalidades
+
+He creado nuevas páginas
+
+## Creación de pantalla Mi Perfil
+
+Para no sobrecomplicar estoy suponiendo que existe un usuario y que este está logeado.
+
+En esta nueva página de perfil encontraremos una pequeña tarjeta con información del usuario y además los libros favoritos que ha ido añadiendo.
+
+## Creación de pantalla Personajes
+
+He creado una nueva pantalla donde se pueden ver los personajes que devuelve el API `https://anapioficeandfire.com/`
+
+En primera instancia encontraremos un buscador para buscar por nombre de personaje, este buscador ataca directamente al API una vez el usuario termina de escribir
+
+He añadido también 3 filtros para poder filtrar la búsqueda
+
+- Filtro de género.
+- Filtro de año de nacimiento.
+- Filtro de año de muerte.
+
+# Posibles futuras mejoras
+
+Después de los cambios realizados se podrían seguir mejorando varias cosas en la aplicación:
+
+- Mejora del diseño.
+- Añadir que las búsquedas se guarden en la URL y no en un estado. Con esto podríamos conseguir enviar al usuario a búsquedas concretas sin tener que hacerlas a mano.
+  - Por ejemplo, si quisiéramos que se buscase la página 2 de los libros, podríamos gestionar una URL de la siguiente forma: `http://localhost:5173?type=books&page=1&size=10`.
