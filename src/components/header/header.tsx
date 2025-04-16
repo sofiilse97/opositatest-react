@@ -14,7 +14,9 @@ const Header: React.FC = () => {
         <a href="/">
           <img src={logo} alt="Logo" className="logo" />
         </a>
-        <Button variant="ghost">Librería</Button>
+        <Button variant="ghost" onClick={() => navigate('/')}>
+          Librería
+        </Button>
         <Button variant="ghost" onClick={() => navigate('/characters')}>
           Personajes
         </Button>
