@@ -2,6 +2,7 @@ import Button from '@/components/ui/button/Button';
 import { useState } from 'react';
 
 import './searchForm.css';
+import Select from '@/components/ui/select/Select';
 
 const SearchForm = ({
   search,
@@ -62,24 +63,25 @@ const SearchForm = ({
       <div className="filters">
         {/* Select para filtrar por género */}
         <div className="filter-item">
-          <label>Género</label>
-          <select
+          <Select
+            label="Género"
             value={internalState.gender}
-            onChange={(e) =>
-              setInternalState((prev) => ({ ...prev, gender: e.target.value }))
+            onChange={(value) =>
+              setInternalState((prev) => ({ ...prev, gender: value }))
             }
-          >
-            <option value="">Todos</option>
-            <option value="female">Femenino</option>
-            <option value="male">Masculino</option>
-          </select>
+            options={[
+              { value: '', label: 'Todos' },
+              { value: 'female', label: 'Fememino' },
+              { value: 'male', label: 'Masculino' },
+            ]}
+          />
         </div>
         <div className="filter-item">
           {/* Input para filtrar por año de nacimiento */}
           <label>Año de nacimiento</label>
           <input
             type="number"
-            placeholder="Año de nacimiento"
+            placeholder="299"
             value={internalState.born || ''}
             onChange={(e) =>
               setInternalState((prev) => ({ ...prev, born: e.target.value }))
@@ -91,7 +93,7 @@ const SearchForm = ({
           <label>Año de muerte</label>
           <input
             type="number"
-            placeholder="Año de muerte"
+            placeholder="299"
             value={internalState.died || ''}
             onChange={(e) =>
               setInternalState((prev) => ({ ...prev, died: e.target.value }))

@@ -1,10 +1,13 @@
 import React from 'react';
 
+import './select.css';
+
 interface SelectProps {
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
   value: string;
   placeholder?: string;
+  label?: string;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -12,20 +15,24 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   value,
   placeholder,
+  label,
 }) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="select"
-    >
-      {placeholder && <option value="">{placeholder}</option>}
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <>
+      {label && <label className="label">{label}</label>}
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="select"
+      >
+        {placeholder && <option value="">{placeholder}</option>}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 

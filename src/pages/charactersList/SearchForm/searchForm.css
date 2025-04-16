@@ -19,8 +19,7 @@
   align-items: flex-end;
 }
 
-.filters input,
-.filters select {
+.filters input {
   padding: 8px;
   border: 1px solid var(--black-1);
   background-color: var(--secondary-color);
