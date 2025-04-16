@@ -14,5 +14,11 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
+    browser: {
+      enabled: true,
+      headless: true,
+      provider: 'playwright',
+      instances: [{ browser: 'chromium' }],
+    },
   },
 });
