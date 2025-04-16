@@ -9,16 +9,16 @@ const SearchForm = ({
   search,
   setSearch,
 }: {
-  search: CharacterSearchParams;
-  setSearch: React.Dispatch<React.SetStateAction<CharacterSearchParams>>;
+  search: Partial<CharacterSearchParams>;
+  setSearch: React.Dispatch<
+    React.SetStateAction<Partial<CharacterSearchParams>>
+  >;
 }) => {
   const [internalState, setInternalState] = useState(search);
 
   const handleCleanFilters = () => {
     setInternalState((prev) => ({
       ...prev,
-      page: 1,
-      size: 15,
       gender: '',
       born: '',
       died: '',
