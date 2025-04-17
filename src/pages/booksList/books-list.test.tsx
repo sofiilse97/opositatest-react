@@ -1,32 +1,9 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  within,
-} from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { screen, fireEvent, waitFor, within } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import BooksList from '../booksList/BooksList';
-import LibraryProvider from '@/context/LibraryProvider';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderWithProvider } from '@/test_utils/test-utils';
 
 describe('BooksList', () => {
-  const renderWithProvider = (ui: React.ReactNode) => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    });
-
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <LibraryProvider>{ui}</LibraryProvider>
-      </QueryClientProvider>
-    );
-  };
-
   it('renderiza correctamente', async () => {
     renderWithProvider(<BooksList />);
     expect(screen.getByText(/Cargando.../i)).toBeInTheDocument();
