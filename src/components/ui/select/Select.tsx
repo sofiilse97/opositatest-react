@@ -16,6 +16,7 @@ const Select: React.FC<SelectProps> = ({
   value,
   placeholder,
   label,
+  ...props
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const Select: React.FC<SelectProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="select"
+        {...props}
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (

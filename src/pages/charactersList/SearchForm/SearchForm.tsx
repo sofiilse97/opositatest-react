@@ -56,6 +56,7 @@ const SearchForm = ({
               { value: 'female', label: 'Fememino' },
               { value: 'male', label: 'Masculino' },
             ]}
+            data-testid="gender-input"
           />
         </div>
         <div className="filter-item">
@@ -68,6 +69,7 @@ const SearchForm = ({
             onChange={(e) =>
               setInternalState((prev) => ({ ...prev, born: e.target.value }))
             }
+            data-testid="born-input"
           />
         </div>
         <div className="filter-item">
@@ -80,6 +82,7 @@ const SearchForm = ({
             onChange={(e) =>
               setInternalState((prev) => ({ ...prev, died: e.target.value }))
             }
+            data-testid="died-input"
           />
         </div>
       </div>
