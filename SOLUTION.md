@@ -216,3 +216,5 @@ Después de los cambios realizados se podrían seguir mejorando varias cosas en 
 - Añadir que las búsquedas se guarden en la URL y no en un estado. Con esto podríamos conseguir enviar al usuario a búsquedas concretas sin tener que hacerlas a mano.
   - Por ejemplo, si quisiéramos que se buscase la página 2 de los libros, podríamos gestionar una URL de la siguiente forma: `http://localhost:5173?type=books&page=1&size=10`.
 - Añadir test que faltan.
+- Añadir inteinternacionalización con [i18n](https://www.i18next.com/)
+- Añadir sistema de login.
