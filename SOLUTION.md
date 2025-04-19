@@ -4,6 +4,30 @@ Este documento describe las mejoras realizadas en el proyecto para cumplir con l
 
 A continuación, se detallan las mejoras realizadas antes y durante el desarrollo.
 
+# Arrancar proyecto
+
+Como no es buena práctica subir los archivos `.env.*` no los he subido, por lo tanto si quisieramos arrancar el proyecto deberemos de crearlos a mano. Anoto aquí las variables de entorno necesarias ya que no hay ningún dato sensible.
+
+Es posible que después de hacer `npm i` y `npm run dev` no os funcione ya que yo trabajo con windows, para poder arrancar simplemente borramos el archivo `package.json.lock`, la carpeta `node_modules` y volvemos a hacer `npm i`
+
+## Arrancar proyecto modo desarrollo
+
+Para ello creamos el archivo `.env.local` o `.env.development` y añadimos las variables de entorno
+
+```
+VITE_API_BASE_URL='https://anapioficeandfire.com'
+VITE_API_COVER_BOOKS='https://covers.openlibrary.org'
+```
+
+## Ejecutar test
+
+Para ello cramos el archivo `.env.test` y añadimos las variables de entorno
+
+```
+VITE_API_BASE_URL='https://anapioficeandfire.com'
+VITE_API_COVER_BOOKS='https://covers.openlibrary.org'
+```
+
 # Mejoras antes del desarrollo
 
 ## Mejora 1 - Cambio de nombre de rama
@@ -180,7 +204,7 @@ Como información del libro, contiene la portada, el título y el autor. Luego t
 
 Este componente contiene la información de los libros recientes abiertos.
 
-## Mejora 9 - Nuevas funcionalidades
+# Mejora 9 - Nuevas funcionalidades
 
 He creado nuevas páginas
 
