@@ -26,21 +26,12 @@ const BooksList: React.FC = () => {
     handleSortWithOpt,
     handleBook,
     handleFavorite,
+    booksQueryData,
+    isLoading,
+    isError,
   } = useBooks();
 
   const { libraryState, setLibraryState } = useLibrary();
-
-  const {
-    data: booksQueryData,
-    isLoading,
-    isError,
-  } = useSearchBookQuery({
-    page: libraryState.page,
-  });
-
-  useEffect(() => {
-    setLibraryState({ books: booksQueryData });
-  }, [booksQueryData]);
 
   if (isLoading) return <p>Cargando...</p>;
 

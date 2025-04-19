@@ -1,5 +1,7 @@
+import { useSearchBookQuery } from '@/api/queries/search/useSearchBookQueries';
 import { useLibrary } from '@/context/hooks/useLibrary';
 import { BookType } from '@/types/book';
+import { useEffect } from 'react';
 
 /**
  * Hook personalizado para gestionar libros en una biblioteca.
@@ -7,14 +9,20 @@ import { BookType } from '@/types/book';
  */
 export const useBooks = () => {
   const { libraryState, setLibraryState } = useLibrary();
+  const { searchQuery, favorites, recentBooks, isSortedAsc, sortedBooks } =
+    libraryState;
+
   const {
-    books,
-    searchQuery,
-    favorites,
-    recentBooks,
-    isSortedAsc,
-    sortedBooks,
-  } = libraryState;
+    data: booksQueryData,
+    isLoading,
+    isError,
+  } = useSearchBookQuery({
+    page: libraryState.page,
+  });
+
+  useEffect(() => {
+    handleSortWithOpt(isSortedAsc);
+  }, [booksQueryData]);
 
   /**
    * Filtra libros por consulta de búsqueda
@@ -33,7 +41,7 @@ export const useBooks = () => {
   /**
    * Devuelve los libros filtrados por la consulta de búsqueda
    */
-  const booksData = (): BookType[] => filterBooks(books, searchQuery);
+  const booksData = (): BookType[] => filterBooks(booksQueryData, searchQuery);
 
   /**
    * Devuelve los libros ordenados y filtrados por la consulta de búsqueda
@@ -48,6 +56,7 @@ export const useBooks = () => {
    */
   const sortBooks = (books: BookType[], sortDir: boolean) => {
     // Se agrega [...books] para evitar mutar el array original y ordenar los libros por nombre
+    if (!books || books.length === 0) return [];
     return [...books].sort((a, b) =>
       sortDir ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
@@ -58,7 +67,7 @@ export const useBooks = () => {
    * Ordena los libros por nombre
    */
   const handleSort = () => {
-    const sorted = sortBooks(books, isSortedAsc);
+    const sorted = sortBooks(booksQueryData, isSortedAsc);
     setLibraryState({ sortedBooks: sorted, isSortedAsc: !isSortedAsc });
   };
 
@@ -67,9 +76,8 @@ export const useBooks = () => {
    * @param sortDir true para ascendente, false para descendente
    */
   const handleSortWithOpt = (sortDir: boolean) => {
-    if (sortDir === isSortedAsc) return;
-
-    const sorted = sortBooks(books, sortDir);
+    if (!booksQueryData || booksQueryData.length === 0) return;
+    const sorted = sortBooks(booksQueryData, sortDir);
     setLibraryState({ sortedBooks: sorted, isSortedAsc: sortDir });
   };
 
@@ -112,11 +120,14 @@ export const useBooks = () => {
   //   };
 
   return {
+    booksQueryData,
     booksData,
     sortedBooksData,
     handleSort,
     handleSortWithOpt,
     handleBook,
     handleFavorite,
+    isLoading,
+    isError,
   };
 };
