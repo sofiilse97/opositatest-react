@@ -7,6 +7,12 @@ import Button from '@/components/ui/button/Button';
 import BookModal from '@/components/book/modal/BookModal';
 import './myFavourites.css';
 
+/**
+ * Componente que muestra los libros favoritos del usuario.
+ * Permite ver detalles de cada libro y agregarlo/eliminarlo de favoritos.
+ *
+ * @returns {JSX.Element} Componente MyFavourites
+ */
 const MyFavourites: React.FC = () => {
   const { handleBook, handleFavorite } = useBooks();
   const { libraryState } = useLibrary();

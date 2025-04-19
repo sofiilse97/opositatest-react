@@ -9,7 +9,15 @@ import List from '@/components/ui/list/List';
 import { CharacterSearchParams } from '@/api/queries/types/character';
 
 import './characterList.css';
+
+/**
+ * Componente principal de la página de personajes.
+ * Muestra una lista de personajes, permite buscar y filtrar por diferentes criterios.
+ *
+ * @returns {JSX.Element} Componente CharacterList
+ */
 const CharacterList = () => {
+  // Estado inicial de búsqueda con parámetros por defecto
   const [search, setSearch] = useState<CharacterSearchParams>({
     page: 1,
     size: 15,
@@ -19,8 +27,9 @@ const CharacterList = () => {
     died: '',
   });
 
+  // Estado para mostrar u ocultar los filtros
   const [showFilters, setShowFilters] = useState(false);
-
+  // Estado para manejar la búsqueda con debounce para evitar hacer demasiadas peticiones a la API mientras el usuario escribe
   const [debouncedSearch, setDebouncedSearch] = useState(search.name);
 
   useEffect(() => {

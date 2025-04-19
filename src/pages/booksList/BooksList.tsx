@@ -13,6 +13,12 @@ import BookModal from '@/components/book/modal/BookModal';
 import './booksList.css';
 import List from '@/components/ui/list/List';
 
+/**
+ * Componente principal de la página de libros.
+ * Muestra una lista de libros, permite buscar, ordenar y ver detalles de cada libro.
+ *
+ * @returns {JSX.Element} Componente BooksList
+ */
 const BooksList: React.FC = () => {
   const {
     booksData,
@@ -44,7 +50,9 @@ const BooksList: React.FC = () => {
     <>
       <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
         <div className="body">
+          {/** Input de busqueda por texto y botón actualizar */}
           <SearchBar />
+          {/** Linros seleccionado recientemente */}
           {libraryState.recentBooks.size > 0 && (
             <RecentBooks
               recentBooks={libraryState.recentBooks}
@@ -54,6 +62,7 @@ const BooksList: React.FC = () => {
 
           <div className="result-container">
             <h3>{booksData().length} resultados</h3>
+            {/** Selector de ordenación */}
             <Select
               options={[
                 { label: 'Ordenar por: Descendente', value: 'false' },
@@ -64,12 +73,13 @@ const BooksList: React.FC = () => {
             />
           </div>
 
+          {/** Listado de los libnros */}
           <List>
             {libraryState.sortedBooks.length > 0
               ? sortedBooksData().map((book: BookType) => <Book book={book} />)
               : booksData().map((book: BookType) => <Book book={book} />)}
           </List>
-
+          {/** Paginador */}
           <Paginator
             backDisabled={libraryState.page === 1}
             nextDisabled={booksQueryData?.length < 10}
@@ -78,6 +88,7 @@ const BooksList: React.FC = () => {
           />
         </div>
 
+        {/** Modal con más información del libro seleccionado */}
         {libraryState.selectedBook && (
           <BookModal
             selectedBook={libraryState.selectedBook}

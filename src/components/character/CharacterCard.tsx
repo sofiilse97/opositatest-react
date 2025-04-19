@@ -2,6 +2,13 @@ import { MdAccountCircle } from 'react-icons/md';
 import './characterCard.css';
 import { Character } from '@/types/character';
 
+/**
+ * Componente que representa una tarjeta de personaje.
+ * Muestra información básica como nombre, género, cultura, fechas de nacimiento y muerte,
+ * títulos, alias e intérpretes.
+ * @param {Character} props - Propiedades del personaje.
+ * @returns {JSX.Element} Tarjeta de personaje.
+ */
 const CharacterCard = ({
   name,
   gender,

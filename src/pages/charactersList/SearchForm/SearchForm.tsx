@@ -5,6 +5,10 @@ import './searchForm.css';
 import Select from '@/components/ui/select/Select';
 import { CharacterSearchParams } from '@/api/queries/types/character';
 
+/**
+ * Componente de formulario de búsqueda para filtrar personajes.
+ * Permite filtrar por género, año de nacimiento y año de muerte.
+ */
 const SearchForm = ({
   search,
   setSearch,
@@ -14,6 +18,7 @@ const SearchForm = ({
     React.SetStateAction<Partial<CharacterSearchParams>>
   >;
 }) => {
+  // Estado interno para manejar los filtros
   const [internalState, setInternalState] = useState(search);
 
   const handleCleanFilters = () => {

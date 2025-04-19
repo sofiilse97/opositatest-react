@@ -4,6 +4,10 @@ import Button from '@/components/ui/button/Button';
 import { useQueryClient } from '@tanstack/react-query';
 import { SEARCH_BOOK_QUERY_KEY } from '@/api/queries/search/useSearchBookQueries';
 
+/**
+ *  Componente de barra de búsqueda para filtrar libros.
+ * @returns {JSX.Element} Componente SearchBar
+ */
 const SearchBar = () => {
   const queryClient = useQueryClient();
   const { libraryState, setLibraryState } = useLibrary();
@@ -19,6 +23,7 @@ const SearchBar = () => {
       <Button
         onClick={() => {
           setLibraryState({ page: 1, size: 10, searchQuery: '' });
+          // Elimina el cache de la consulta de búsqueda
           void queryClient.removeQueries({
             queryKey: [SEARCH_BOOK_QUERY_KEY],
           });

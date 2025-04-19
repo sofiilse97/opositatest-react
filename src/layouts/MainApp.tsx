@@ -3,6 +3,13 @@ import Header from '@/components/header/header';
 import Footer from '@/components/footer/Footer';
 
 import './MainApp.css';
+
+/**
+ * Componente principal de la aplicación.
+ * Contiene el encabezado, el contenido principal y el pie de página.
+ *
+ * @returns {JSX.Element} Componente MainApp
+ */
 const MainApp = () => {
   return (
     <>

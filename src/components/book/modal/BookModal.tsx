@@ -8,6 +8,15 @@ import { parseYear } from '@/utils/dates/dateUtil';
 import Button from '@/components/ui/button/Button';
 import './bookModal.css';
 
+/**
+ * Componente de modal para mostrar los detalles de un libro.
+ * Permite ver información detallada y agregarlo a favoritos.
+ *
+ * @param {BookType | null} selectedBook - Libro seleccionado para mostrar.
+ * @param {Function} handleFavorite - Función para manejar la acción de agregar a favoritos.
+ * @param {Set<string>} favorites - Conjunto de libros favoritos.
+ * @returns {JSX.Element | null} Componente BookModal
+ */
 const BookModal = ({
   selectedBook,
   handleFavorite,
@@ -19,6 +28,7 @@ const BookModal = ({
 }) => {
   const { setLibraryState } = useLibrary();
 
+  // Estado para manejar si el libro es favorito o no
   const [isFavourite, setIsFavourite] = useState(
     (selectedBook && favorites.has(selectedBook?.url)) ?? false
   );
@@ -32,10 +42,12 @@ const BookModal = ({
     if (selectedBook) {
       document.body.classList.add('no-scroll');
     } else {
+      // Restablecer el scroll del fondo
       document.body.classList.remove('no-scroll');
     }
 
     return () => {
+      // Restablecer el scroll del fondo
       document.body.classList.remove('no-scroll');
     };
   }, [selectedBook]);

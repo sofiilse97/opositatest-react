@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LibraryContext } from './LibraryContext';
 
+// Estado inicial de la librería
 const initialState: LibraryState = {
   page: 1,
   books: [],

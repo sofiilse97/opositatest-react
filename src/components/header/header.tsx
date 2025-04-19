@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router';
 import './header.css';
 import Button from '../ui/button/Button';
 
+/**
+ * Componente de cabecera de la aplicación.
+ * Contiene el logo, enlaces a la librería y personajes, y un icono de cuenta.
+ * @returns {JSX.Element} Componente Header
+ */
 const Header: React.FC = () => {
   const navigate = useNavigate();
   return (

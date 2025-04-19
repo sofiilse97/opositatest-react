@@ -6,6 +6,13 @@ import { useLibrary } from '@/context/hooks/useLibrary';
 import { getCoverFile } from '@/api/search/books';
 import BookImage from '@/components/ui/image/BookImage';
 
+/**
+ * Componente que representa un libro en la lista de libros.
+ * Muestra la imagen de la portada, el título y el autor del libro.
+ *
+ * @param {BookType} book - Libro para mostrar.
+ * @returns {JSX.Element} Componente Book
+ */
 const Book = ({ book }: { book: BookType }) => {
   const { handleBook, handleFavorite } = useBooks();
   const { libraryState } = useLibrary();

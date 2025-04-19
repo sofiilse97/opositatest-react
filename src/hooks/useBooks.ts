@@ -1,6 +1,10 @@
 import { useLibrary } from '@/context/hooks/useLibrary';
 import { BookType } from '@/types/book';
 
+/**
+ * Hook personalizado para gestionar libros en una biblioteca.
+ * Proporciona funcionalidades para filtrar, ordenar, seleccionar y gestionar favoritos.
+ */
 export const useBooks = () => {
   const { libraryState, setLibraryState } = useLibrary();
   const {
@@ -13,44 +17,45 @@ export const useBooks = () => {
   } = libraryState;
 
   /**
-   * Filer books by query
-   * @param books array of books to filter
-   * @param query the search query
+   * Filtra libros por consulta de búsqueda
+   * @param books array de libros a filtrar
+   * @param query la consulta de búsqueda
    */
   const filterBooks = (books: BookType[], query: string): BookType[] => {
     if (!books || books.length === 0) return [];
 
-    // remove lodash beacause it is not necessary, javascript has a built-in method to filter arrays
+    // No es necesario usar lodash, JavaScript tiene un método incorporado para filtrar arrays
     return books.filter((b) =>
       b.name.toLowerCase().includes(query.toLowerCase())
     );
   };
 
   /**
-   * Returns the books filtered by the search query
+   * Devuelve los libros filtrados por la consulta de búsqueda
    */
   const booksData = (): BookType[] => filterBooks(books, searchQuery);
 
   /**
-   * Returns the books sorted and filtered by the search query
+   * Devuelve los libros ordenados y filtrados por la consulta de búsqueda
    */
   const sortedBooksData = (): BookType[] =>
     filterBooks(sortedBooks, searchQuery);
 
   /**
-   * Sorting books by name
-   * @param books array of books to sorting
-   * @param sortDir true for ascending, false for descending
+   * Ordena los libros por nombre
+   * @param books array de libros a ordenar
+   * @param sortDir true para ascendente, false para descendente
    */
   const sortBooks = (books: BookType[], sortDir: boolean) => {
-    // add [...books] to avoid mutating the original array and sort the books by name
+    // Se agrega [...books] para evitar mutar el array original y ordenar los libros por nombre
     return [...books].sort((a, b) =>
       sortDir ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
     );
   };
 
   /**
-   * Sort the books by name
+   * TODO: eliminar no se utiliza
+   * Ordena los libros por nombre
    */
   const handleSort = () => {
     const sorted = sortBooks(books, isSortedAsc);
@@ -58,8 +63,8 @@ export const useBooks = () => {
   };
 
   /**
-   * Sort the books by name passing the direction
-   * @param sortDir true for ascending, false for descending
+   * Ordena los libros por nombre pasando la dirección
+   * @param sortDir true para ascendente, false para descendente
    */
   const handleSortWithOpt = (sortDir: boolean) => {
     if (sortDir === isSortedAsc) return;
@@ -69,8 +74,8 @@ export const useBooks = () => {
   };
 
   /**
-   * Open the book details and save the book in recent books
-   * @param bk the book to set as selected
+   * Abre los detalles del libro y guarda el libro en los libros recientes
+   * @param bk el libro a establecer como seleccionado
    */
   const handleBook = (bk: BookType) => {
     const newRecents = new Map(recentBooks || []);
@@ -83,8 +88,8 @@ export const useBooks = () => {
   };
 
   /**
-   * Add or remove a book from favorites
-   * @param bk the book to add or remove
+   * Agrega o elimina un libro de favoritos
+   * @param bk el libro a agregar o eliminar
    */
   const handleFavorite = (bk: BookType) => {
     const newFavorites = new Map(favorites || []);
