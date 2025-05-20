@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 import { BookType } from '@/types/book';
@@ -18,24 +18,28 @@ import './bookModal.css';
  * @returns {JSX.Element | null} Componente BookModal
  */
 const BookModal = ({
-  selectedBook,
   handleFavorite,
-  favorites,
 }: {
-  selectedBook: BookType | null;
   handleFavorite: (b: BookType) => void;
-  favorites: Set<string>;
 }) => {
-  const { setLibraryState } = useLibrary();
+  const { libraryState, setLibraryState } = useLibrary();
 
   // Estado para manejar si el libro es favorito o no
   const [isFavourite, setIsFavourite] = useState(
-    (selectedBook && favorites.has(selectedBook?.url)) ?? false
+    (libraryState.selectedBook &&
+      libraryState.favorites.has(libraryState.selectedBook?.url)) ??
+      false
+  );
+
+  const selectedBook = useMemo(
+    () => libraryState.selectedBook,
+    [libraryState.selectedBook]
   );
 
   useEffect(() => {
-    if (selectedBook) setIsFavourite(favorites.has(selectedBook?.url));
-  }, [favorites]);
+    if (selectedBook)
+      setIsFavourite(libraryState.favorites.has(selectedBook?.url));
+  }, [libraryState.favorites]);
 
   useEffect(() => {
     // Bloquear el scroll del fondo cuando el modal está abierto
