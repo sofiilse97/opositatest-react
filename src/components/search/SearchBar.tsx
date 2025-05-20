@@ -3,6 +3,7 @@ import './searchBar.css';
 import Button from '@/components/ui/button/Button';
 import { useQueryClient } from '@tanstack/react-query';
 import { SEARCH_BOOK_QUERY_KEY } from '@/api/queries/search/useSearchBookQueries';
+import { useCallback } from 'react';
 
 /**
  *  Componente de barra de búsqueda para filtrar libros.
@@ -12,24 +13,29 @@ const SearchBar = () => {
   const queryClient = useQueryClient();
   const { libraryState, setLibraryState } = useLibrary();
 
+  const handleClick = useCallback(() => {
+    setLibraryState({ page: 1, size: 10, searchQuery: '' });
+    void queryClient.removeQueries({
+      queryKey: [SEARCH_BOOK_QUERY_KEY],
+    });
+  }, [setLibraryState, queryClient]);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLibraryState({ searchQuery: e.target.value });
+    },
+    [setLibraryState]
+  );
+
   return (
     <div className="buscador">
       <input
         type="text"
         placeholder="Buscar libro"
         value={libraryState.searchQuery || ''}
-        onChange={(e) => setLibraryState({ searchQuery: e.target.value })}
+        onChange={handleChange}
       />
-      <Button
-        onClick={() => {
-          setLibraryState({ page: 1, size: 10, searchQuery: '' });
-          // Elimina el cache de la consulta de búsqueda
-          void queryClient.removeQueries({
-            queryKey: [SEARCH_BOOK_QUERY_KEY],
-          });
-        }}
-        className="updateBtn"
-      >
+      <Button onClick={handleClick} className="updateBtn">
         Actualizar libros
       </Button>
     </div>
