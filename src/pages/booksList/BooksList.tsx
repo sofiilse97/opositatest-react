@@ -24,7 +24,6 @@ const BooksList: React.FC = () => {
     booksData,
     sortedBooksData,
     handleSortWithOpt,
-    handleBook,
     handleFavorite,
     booksQueryData,
     isLoading,
@@ -44,12 +43,7 @@ const BooksList: React.FC = () => {
           {/** Input de busqueda por texto y botón actualizar */}
           <SearchBar />
           {/** Linros seleccionado recientemente */}
-          {libraryState.recentBooks.size > 0 && (
-            <RecentBooks
-              recentBooks={libraryState.recentBooks}
-              handleBook={handleBook}
-            />
-          )}
+          <RecentBooks />
 
           <div className="result-container">
             <h3>{booksData().length} resultados</h3>
@@ -81,11 +75,7 @@ const BooksList: React.FC = () => {
 
         {/** Modal con más información del libro seleccionado */}
         {libraryState.selectedBook && (
-          <BookModal
-            selectedBook={libraryState.selectedBook}
-            handleFavorite={handleFavorite}
-            favorites={libraryState.favorites}
-          />
+          <BookModal handleFavorite={handleFavorite} />
         )}
       </div>
     </>

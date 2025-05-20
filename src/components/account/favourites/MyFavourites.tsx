@@ -56,11 +56,7 @@ const MyFavourites: React.FC = () => {
         <p>No tienes libros favoritos.</p>
       )}
       {libraryState.selectedBook && (
-        <BookModal
-          selectedBook={libraryState.selectedBook}
-          handleFavorite={handleFavorite}
-          favorites={libraryState.favorites}
-        />
+        <BookModal handleFavorite={handleFavorite} />
       )}
     </div>
   );
