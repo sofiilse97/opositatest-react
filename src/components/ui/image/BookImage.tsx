@@ -1,4 +1,5 @@
 import defaultBook from '@/resources/defaultBook.png';
+import { memo } from 'react';
 
 const BookImage = ({ src }: { src: string }) => {
   return (
@@ -11,4 +12,4 @@ const BookImage = ({ src }: { src: string }) => {
   );
 };
 
-export default BookImage;
+export default memo(BookImage);
